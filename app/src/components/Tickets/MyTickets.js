@@ -29,6 +29,7 @@ class MyTickets extends Component {
             return (
                 <div key={i}>
                     <Link to={{pathname: '/dashboard/ticket/', query: data.ticket_id}}><h1>{data.ticket_id}</h1></Link>
+                    {console.log(data.ticket_id)}
                     <h1>{data.status}</h1>
                     <h1>{data.subject}</h1>
                     <h1>{data.tag}</h1>

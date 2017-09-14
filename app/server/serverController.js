@@ -9,6 +9,12 @@ module.exports = {
         });
     },
 
+    getUserById: (DB, request, response, auth_id) => {
+        DB.find_user_by_authID(auth_id).then(user => {
+            response.status(200).send(user);
+        });
+    },
+
     getAllTickets: (DB, response, auth_id) => {
         DB.find_user_role(auth_id).then((data) => {
             if (data[0].role === 'admin') {
@@ -36,6 +42,11 @@ module.exports = {
     createTicket: (DB, response, ticketData) => {
         let { auth_id, subject, status, tag, description } = ticketData;
         DB.create_ticket(auth_id, subject, status, tag, description).then(data => {
+
+            DB.init_comment(data[0].ticket_id).then(() => {
+                console.log('Created Comment Section');
+            })
+
             response.status(200).send(data);
         });
     },
@@ -56,7 +67,7 @@ module.exports = {
 
     postComment: (DB, request, response, commentData) => {
         console.log(commentData);
-        DB.post_comment([commentData]).then((data) => {
+        DB.post_comment([commentData, commentData.ticket_id]).then((data) => {
             response.status(200).send('Comment Successful');
         })
     },

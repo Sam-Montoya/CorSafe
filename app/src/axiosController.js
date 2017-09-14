@@ -7,6 +7,13 @@ module.exports = {
         })
     },
 
+    getUserById: (auth_id) => {
+        let authID = {auth_id: auth_id}
+        return axios.post('/api/getUserById', authID).then(data => {
+            return data.data;
+        })
+    },
+
     createTicket: (ticketData) => {
         axios.post('/api/createTicket', ticketData).then(data => {
             console.log(data);
@@ -34,5 +41,11 @@ module.exports = {
         return axios.post('/api/getComments', ticketID).then(ticketData => {
             return ticketData;
         })
-    } 
+    } ,
+
+    postComment: (commentData) => {
+        return axios.post('/api/postComment', commentData).then(data => {
+            return console.log(data);
+        })
+    }
 }

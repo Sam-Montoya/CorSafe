@@ -79,6 +79,13 @@ app.get('/auth0/logout', (request, response) => {
 // -----------------------
 // -   API CALLS
 // ----------------------
+app.get('/api/getUserInfo', (request, response) => {
+    response.status(200).send(request.user);
+});
+app.post('/api/getUserById', (request, response) => {
+    let DB = app.get('DB');
+    serverController.getUserById(DB, request, response, request.body.auth_id);
+});
 app.get('/api/getAllTickets', (request, response) => {
     let DB = app.get('DB');
     serverController.getAllTickets(DB, request, response, request.body);
@@ -121,19 +128,17 @@ app.post('/api/postComment', (request, response) => {
 
     //SYNTAX
     // let comment = {
-    //     "user_id": "auth_id-1",
+    //     "ticket_id": "33",
+    //     "name": "Sam Montoya",
+    //     "profile_pic": "https://lh4.googleusercontent.com/-XjsOddNmPZY/AAAAAAAAAAI/AAAAAAAAAzQ/oQ9N0Fxszis/photo.jpg",
+    //     "auth_id": "google-oauth2|108353722291765184973",
     //     "comment": "A comment from Code"
     // }
 });
 app.post('/api/getComments', (request,response) => {
     let DB = app.get('DB');
-    console.log(request.body.ticket_id)
     serverController.getComment(DB, request, response, request.body.ticket_id);
-})
-app.get('/api/getUserInfo', (request, response) => {
-    response.status(200).send(request.user);
 });
-
 // -----------------------
 // -   END
 // ----------------------
