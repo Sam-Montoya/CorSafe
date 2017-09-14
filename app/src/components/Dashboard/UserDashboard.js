@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import './UserDashboard.css';
 
-import { Switch, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
-import Home from '../Home/Home';
 
 class UserDashboard extends Component {
     render() {

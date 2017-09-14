@@ -21,24 +21,12 @@ class SelectedTicket extends Component {
             },
             postComment: {
                 ticket_id: 0,
-                // name: 'Wheatly Montoya',
-                // profile_pic: 'https://lh4.googleusercontent.com/-XjsOddNmPZY/AAAAAAAAAAI/AAAAAAAAAzQ/oQ9N0Fxszis/photo.jpg',
-                // auth_id: 'google-oauth2|108353722291765184973',
-                // comment: ''
                 name: '',
                 profile_pic: '',
                 auth_id: '',
                 comment: ''
             },
             comments: []
-
-            // let comment = {
-            //     "ticket_id": "33",
-            //     "name": "Sam Montoya",
-            //     "profile_pic": "https://lh4.googleusercontent.com/-XjsOddNmPZY/AAAAAAAAAAI/AAAAAAAAAzQ/oQ9N0Fxszis/photo.jpg",
-            //     "auth_id": "google-oauth2|108353722291765184973",
-            //     "comment": "A comment from Code"
-            // }
         }
         this.postComment = this.postComment.bind(this);
     }
@@ -56,17 +44,16 @@ class SelectedTicket extends Component {
         })
 
         axiosController.getTicketById(this.props.location.query).then(ticketInfo => {
-            if (ticketInfo.data[0]) {
+            if (ticketInfo[0]) {
                 this.setState({
-                    selectedTicket: ticketInfo.data[0]
+                    selectedTicket: ticketInfo[0]
                 })
             }
         });
         axiosController.getComments(this.props.location.query).then(comments => {
-            console.log(comments.data[0])
-            if (comments.data[0]) {
+            if (comments[0]) {
                 this.setState({
-                    comments: comments.data[0].comments
+                    comments: comments[0].comments
                 });
             }
         });
@@ -74,10 +61,11 @@ class SelectedTicket extends Component {
 
     updateComments() {
         axiosController.getComments(this.props.location.query).then(comments => {
-            console.log('GET COMMENT   ', comments)
-            this.setState({
-                comments: comments.data[0].comments
-            });
+            if (comments[0]) {
+                this.setState({
+                    comments: comments[0].comments
+                });
+            }
         });
     }
 
@@ -90,14 +78,15 @@ class SelectedTicket extends Component {
     }
 
     postComment() {
-        axiosController.postComment(this.state.postComment).then(() => {
-            this.updateComments();
-        });
-        
-        document.getElementById('submitarea').value = '';
-        console.log(this.props)
+        if (this.state.ticket_id === 0) {
 
-        console.log('state check: ', this.state.selectedTicket);
+        } else {
+            axiosController.postComment(this.state.postComment).then(() => {
+                this.updateComments();
+            });
+
+            document.getElementById('submitarea').value = '';
+        }
     }
 
     render() {

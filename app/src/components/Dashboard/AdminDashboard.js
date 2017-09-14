@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { updateCurrentUser } from '../ducks/user-reducer';
 import { connect } from 'react-redux';
 import axiosController from '../../axiosController';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import UserSettings from '../Settings/UserSettings';
 
 class AdminDashboard extends Component {

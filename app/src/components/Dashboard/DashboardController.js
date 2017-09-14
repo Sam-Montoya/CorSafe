@@ -6,18 +6,17 @@ import { updateCurrentUser } from '../ducks/user-reducer';
 
 import axiosController from '../../axiosController';
 
-import SideNavBar from '../SideNavBar';
 import AdminDashboard from './AdminDashboard';
 import UserDashboard from './UserDashboard';
-import UserSettings from '../Settings/UserSettings';
+// import UserSettings from '../Settings/UserSettings';
 
 import './DashboardController.css';
 
 class DashboardController extends Component {
 
     componentDidMount() {
-        axiosController.getUserInfo().then(res => {
-            this.props.updateCurrentUser(res.data);
+        axiosController.getUserInfo().then(userInfo => {
+            this.props.updateCurrentUser(userInfo);
         });
     }
 

@@ -101,41 +101,21 @@ app.post('/api/getTicketById', (request, response) => {
 app.post('/api/createTicket', (request, response) => {
     let DB = app.get('DB');
     serverController.createTicket(DB, response, request.body);
-    
-    //SYNTAX
-    // let ticketData = {
-    //     auth_id: 'auth_id-4'
-    //     , subject: 'Subject Reason'
-    //     , status: 'Status field'
-    //     , tag: 'critical'
-    //     , description: 'Desc Field'
-    // };
 });
-app.get('/api/updateTicketStatus/:ticket_id/:auth_id', (request, response) => {
+app.get('/api/updateTicketStatus', (request, response) => {
     let DB = app.get('DB');
     let { ticket_id, status } = request.data;
     serverController.updateTicketStatus(DB, request, response, status, request.params.auth_id);
-
-    //SYNTAX
-    // let ticketData = {
-    //     ticket_id: request.params.ticket_id,
-    //     status: "Resolved"
-    // }
 });
 app.post('/api/postComment', (request, response) => {
     let DB = app.get('DB');
-    serverController.postComment(DB, request, response, request.body);
-
-    //SYNTAX
-    // let comment = {
-    //     "ticket_id": "33",
-    //     "name": "Sam Montoya",
-    //     "profile_pic": "https://lh4.googleusercontent.com/-XjsOddNmPZY/AAAAAAAAAAI/AAAAAAAAAzQ/oQ9N0Fxszis/photo.jpg",
-    //     "auth_id": "google-oauth2|108353722291765184973",
-    //     "comment": "A comment from Code"
-    // }
+    if (request.user) {
+        serverController.postComment(DB, request, response, request.body, request.user.auth_id);
+    } else {
+        response.status(400).send('Bad Auth_ID');
+    }
 });
-app.post('/api/getComments', (request,response) => {
+app.post('/api/getComments', (request, response) => {
     let DB = app.get('DB');
     serverController.getComment(DB, request, response, request.body.ticket_id);
 });

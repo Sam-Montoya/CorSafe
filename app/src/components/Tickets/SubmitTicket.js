@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 
 import './SubmitTicket.css';
 
-import axios from 'axios'
 import axiosController from '../../axiosController';
 
-import { Switch, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class SubmitTicket extends Component {
@@ -28,7 +27,6 @@ class SubmitTicket extends Component {
     }
 
     render() {
-        console.log(this.state)
         return (
             <div className='submit-ticket_container'>
                 <h1>MY FRICKIN TICKETS</h1>
