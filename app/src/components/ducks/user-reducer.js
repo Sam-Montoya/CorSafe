@@ -1,22 +1,18 @@
-import axios from 'axios';
-
 const initialState = {
-    user: {
-        username: 'test',
-        name: '',
-        email: '',
-        profilepic: '',
-        auth_id: '',
-        role: ''
-    }
+    username: '',
+    name: '',
+    email: '',
+    profilepic: '',
+    auth_id: '',
+    role: ''
 }
 
 const GET_USER_INFO = 'GET_USER_INFO';
+const CHANGE_USERNAME = 'CHANGE_USERNAME';
+const UPDATE_CURRENT_USER = 'UPDATE_CURRENT_USER';
 
 export function getUserInfo() {
-    // let userInfo = axios.get('/api/getUserInfo', auth_id).then(response => {
-    //     return response.data;
-    // });
+
     let userInfo = {
         username: 'Test',
         name: 'test',
@@ -32,9 +28,28 @@ export function getUserInfo() {
     };
 };
 
+//create an action that will change user.username
+export function changeUsername(value) {
+    return {
+        type: CHANGE_USERNAME,
+        payload: value
+    }
+}
+
+export function updateCurrentUser(user) {
+    return {
+        type: UPDATE_CURRENT_USER,
+        payload: user
+    }
+}
+
 export default function reducer(state = initialState, action) {
     switch (action.type) {
-        case GET_USER_INFO + '_FULFILLED':
+        case UPDATE_CURRENT_USER:
+            return Object.assign({}, state, action.payload);
+        case GET_USER_INFO:
+            return Object.assign({}, state, action.payload);
+        case CHANGE_USERNAME:
             return Object.assign({}, state, { username: action.payload });
         default:
             return state;

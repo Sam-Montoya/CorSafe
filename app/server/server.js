@@ -3,72 +3,29 @@ const serverController = require('./serverController');
 const express = require('express');
 const bodyParser = require('body-parser');
 const massive = require('massive');
+const cors = require('cors');
 
 //Auth0
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 const session = require('express-session');
 
-const app = express(bodyParser.json());
-
-//Database connection
-massive(process.env.CONNECTIONSTRING).then(DB => {
-    app.set('DB', DB);
-    console.log('Connection to the database was successful...');
-}).catch(err => console.log('FAILED to connect to the database. ' + err));
-let DB = app.get('DB');
-
-
-// -----------------------
-// -   API CALLS
-// ----------------------
-app.get('/api/getAllTickets/:auth_id', (request, response) => {
-    let DB = app.get('DB');
-    serverController.getAllTickets(DB, request, response, request.params.auth_id);
-});
-app.get('/api/getTicketByID/:ticket_id/:auth_id', (request, response) => {
-    let DB = app.get('DB');
-    serverController.getTicketById(DB, request, response, request.params.ticket_id, request.params.auth_id);
-});
-app.get('/api/createTicket', (request, response) => {
-    let DB = app.get('DB');
-    let { auth_id, subject, status, description } = request.data;
-    serverController.createTicket(DB, request, response, ticketData);
-
-    //SYNTAX
-    // let ticketData = {
-    //     auth_id: 'auth_id-4'
-    //     , subject: 'Subject Reason'
-    //     , status: 'Status field'
-    //     , description: 'Desc Field'
-    // };
-});
-app.get('/api/updateTicketStatus/:ticket_id/:auth_id', (request, response) => {
-    let DB = app.get('DB');
-    let { ticket_id, status } = request.data;
-    serverController.updateTicketStatus(DB, request, response, status, request.params.auth_id);
-
-    //SYNTAX
-    // let ticketData = {
-    //     ticket_id: request.params.ticket_id,
-    //     status: "Resolved"
-    // }
-});
-app.get('/api/postComment', (request, response) => {
-    let DB = app.get('DB');
-    let comment = {
-        "user_id": "auth_id-1",
-        "comment": "A comment from Code"
-    }
-    serverController.postComment(DB, request, response, comment);
-})
-// -----------------------
-// -   END
-// ----------------------
+const app = express();
+app.use(bodyParser.json());
+app.use(cors());
 
 
 
 // ---------------------
+// -   Database
+// --------------------
+massive(process.env.CONNECTIONSTRING).then(DB => {
+    app.set('DB', DB);
+    console.log('Connection to the database was successful...');
+}).catch(err => console.log('FAILED to connect to the database. ' + err));
+
+
+// --------------------
 // -   Auth0
 // --------------------
 app.use(session({
@@ -84,7 +41,6 @@ passport.use(new Auth0Strategy({
     clientSecret: process.env.AUTH_CLIENTSECRET,
     callbackURL: process.env.AUTH_CALLBACK
 }, (accessToken, refreshToken, extraParams, profile, done) => {
-    let DB = app.get('DB');
     let profileData = {
         username: profile.nickname
         , name: profile.displayName
@@ -93,6 +49,7 @@ passport.use(new Auth0Strategy({
         , auth_id: profile.id
         , role: 'user'
     }
+    let DB = app.get('DB');
     serverController.createUser(DB, profileData);
     return done(null, profileData);
 }));
@@ -116,6 +73,70 @@ app.get('/auth0/logout', (request, response) => {
 // ------------------
 // -   END
 // ------------------
+
+
+
+// -----------------------
+// -   API CALLS
+// ----------------------
+app.get('/api/getAllTickets', (request, response) => {
+    let DB = app.get('DB');
+    serverController.getAllTickets(DB, request, response, request.body);
+});
+app.post('/api/getUserTickets', (request, response) => {
+    let DB = app.get('DB');
+    serverController.getUserTickets(DB, request, response, request.body.auth_id);
+})
+app.post('/api/getTicketById', (request, response) => {
+    let DB = app.get('DB');
+    serverController.getTicketById(DB, request, response, request.body.ticket_id);
+});
+app.post('/api/createTicket', (request, response) => {
+    let DB = app.get('DB');
+    serverController.createTicket(DB, response, request.body);
+    
+    //SYNTAX
+    // let ticketData = {
+    //     auth_id: 'auth_id-4'
+    //     , subject: 'Subject Reason'
+    //     , status: 'Status field'
+    //     , tag: 'critical'
+    //     , description: 'Desc Field'
+    // };
+});
+app.get('/api/updateTicketStatus/:ticket_id/:auth_id', (request, response) => {
+    let DB = app.get('DB');
+    let { ticket_id, status } = request.data;
+    serverController.updateTicketStatus(DB, request, response, status, request.params.auth_id);
+
+    //SYNTAX
+    // let ticketData = {
+    //     ticket_id: request.params.ticket_id,
+    //     status: "Resolved"
+    // }
+});
+app.post('/api/postComment', (request, response) => {
+    let DB = app.get('DB');
+    serverController.postComment(DB, request, response, request.body);
+
+    //SYNTAX
+    // let comment = {
+    //     "user_id": "auth_id-1",
+    //     "comment": "A comment from Code"
+    // }
+});
+app.post('/api/getComments', (request,response) => {
+    let DB = app.get('DB');
+    console.log(request.body.ticket_id)
+    serverController.getComment(DB, request, response, request.body.ticket_id);
+})
+app.get('/api/getUserInfo', (request, response) => {
+    response.status(200).send(request.user);
+});
+
+// -----------------------
+// -   END
+// ----------------------
 
 
 

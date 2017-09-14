@@ -9,7 +9,7 @@ module.exports = {
         });
     },
 
-    getAllTickets: (DB, request, response, auth_id) => {
+    getAllTickets: (DB, response, auth_id) => {
         DB.find_user_role(auth_id).then((data) => {
             if (data[0].role === 'admin') {
                 DB.get_all_tickets().then((data) => {
@@ -21,27 +21,26 @@ module.exports = {
         });
     },
 
-    getTicketById: (DB, request, response, ticket_id, auth_id) => {
-        DB.find_user_role(auth_id).then((data) => {
-            if (data[0].role === 'admin') {
-                DB.get_ticket_by_id(request.params.ticket_id).then(data => {
-                    response.status(200).send(data);
-                });
-            } else {
-                response.send('Not Authenticated');
-            }
-        });
+    getUserTickets: (DB, request, response, auth_id) => {
+        DB.get_user_tickets(auth_id).then(data => {
+            response.send(data);
+        })
     },
 
-    createTicket: (DB, request, response, ticketData) => {
-        let { auth_id, subject, status, description } = ticketData;
-
-        DB.create_ticket(auth_id, subject, status, description).then(data => {
+    getTicketById: (DB, request, response, ticket_id) => {
+        DB.get_ticket_by_id(ticket_id).then(data => {
             response.status(200).send(data);
         });
     },
 
-    updateTicketStatus: (DB, request, response, ticketData, auth_id) => {
+    createTicket: (DB, response, ticketData) => {
+        let { auth_id, subject, status, tag, description } = ticketData;
+        DB.create_ticket(auth_id, subject, status, tag, description).then(data => {
+            response.status(200).send(data);
+        });
+    },
+
+    updateTicketStatus: (DB, response, ticketData, auth_id) => {
         let { ticket_id, status } = ticketData;
 
         DB.find_user_role(auth_id).then((data) => {
@@ -59,6 +58,12 @@ module.exports = {
         console.log(commentData);
         DB.post_comment([commentData]).then((data) => {
             response.status(200).send('Comment Successful');
+        })
+    },
+
+    getComment: (DB, request,response,ticket_id) => {
+        DB.get_comments(request.body.ticket_id).then(data => {
+            response.status(200).send(data);
         })
     }
 }

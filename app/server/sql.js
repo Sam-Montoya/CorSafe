@@ -39,6 +39,14 @@
 // select * from comments;
 
 
+// update comments set comments = array_append
+// (comments, '{"user_id": "auth_id-1", "comment": "Sam Made a Comment"}')
+// WHERE ticket_id = 33;
+// select * from comments
+
+
+
+
 // INSERT INTO users(username, name, email, profilepic, auth_id)
 // VALUES ('BrettlyC', 'Sam', 'brettly.clawfield@gmail.com', 'picURL', 'auth_id-1');
 // INSERT INTO users(username, name, email, profilepic, auth_id)
@@ -53,3 +61,7 @@
 
 // INSERT INTO tickets (auth_id, subject, status, description)
 // VALUES ('auth_id-1','Subject','Not Answered','Desc');
+
+
+// insert into time (date) values (CURRENT_TIMESTAMP);
+// ALTER TABLE tickets ADD COLUMN date TIMESTAMP;

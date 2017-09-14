@@ -1,0 +1,10 @@
+.dashboard_background {
+    height: 100vh;
+    width: 100%;
+    background-image: url('../../images/Dashboard.jpg');
+}
+.dashboard_background img {
+    z-index: -1;
+    width:100vw;
+	height:100vh;
+}
