@@ -8,7 +8,9 @@ import axiosController from '../../axiosController';
 
 import AdminDashboard from './AdminDashboard';
 import UserDashboard from './UserDashboard';
-// import UserSettings from '../Settings/UserSettings';
+
+import SubmitTicket from '../Tickets/SubmitTicket';
+import MyTickets from '../Tickets/MyTickets';
 
 import './DashboardController.css';
 
@@ -22,13 +24,13 @@ class DashboardController extends Component {
 
     render() {
         return (
-            <div className='dashboard_background'>
+            <div className="dashboard_container">
                 <Switch>
-                    {this.props.user.role === "admin" 
-                    ? 
-                    <Route component={AdminDashboard} /> 
-                    : 
-                    <Route component={UserDashboard} />}
+                    {this.props.user.role === 'admin'
+                        ?
+                        <Route component={AdminDashboard} />
+                        :
+                        <Route component={UserDashboard} />}
                 </Switch>
             </div>
         )

@@ -4,13 +4,32 @@ import './UserDashboard.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import plus from '../../images/CorSafePlus.png';
+import ticketList from '../../images/TicketList.png';
+
 class UserDashboard extends Component {
     render() {
         return (
             <div className='userdashboard_container'>
-                <h1>Welcome USER, {this.props.user.username}</h1>
-                    <Link to='/dashboard/submit-ticket'><button>Submit A Ticket</button></Link>
-                    <Link to='/dashboard/my-tickets'><button>My Tickets</button></Link>
+                <div className="userdashboard_overlay">
+                    <div>
+                        <Link to='/dashboard/submit-ticket'>
+                            <div className='userdashboard_buttoncontainers'>
+                                <img className='container_images' src={plus} alt='' />
+                            </div>
+                            <button className='user_buttons'>Submit A Ticket</button>
+                        </Link>
+                    </div>
+
+                    <div>
+                        <Link to='/dashboard/my-tickets'>
+                            <div className='userdashboard_buttoncontainers'>
+                                <img className='container_images' src={ticketList} alt='' />
+                            </div>
+                            <button className='user_buttons'>My Tickets</button>
+                        </Link>
+                    </div>
+                </div>
             </div>
         )
     }

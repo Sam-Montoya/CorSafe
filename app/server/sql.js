@@ -10,14 +10,15 @@
 // UPDATE users SET role = 'user' WHERE role IS null;
 // select * from users;
 
-// CREATE TABLE tickets (
-// id SERIAL PRIMARY KEY,
-// username VARCHAR(20),
-// auth_id TEXT REFERENCES users (auth_id),
-// subject TEXT,
-// status VARCHAR(15),
-// description TEXT
-// );
+// create table tickets (
+// 	ticket_id serial primary key,
+//     auth_id text,
+//     subject text,
+//     status varchar(15),
+//     description text,
+//     date TIMESTAMP,
+//     tag text
+// )
 
 
 // SELECT * FROM users;

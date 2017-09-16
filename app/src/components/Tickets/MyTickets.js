@@ -25,18 +25,24 @@ class MyTickets extends Component {
     }
 
     render() {
-        let userTickets = this.state.userTickets.map(function (data, i) {
-            return (
-                <div key={i}>
-                    <Link to={{pathname: '/dashboard/ticket/', query: data.ticket_id}}><h1>{data.ticket_id}</h1></Link>
-                    <h1>{data.status}</h1>
-                    <h1>{data.subject}</h1>
-                    <h1>{data.tag}</h1>
-                    <h1>{data.description}</h1>
-                    <h1>{data.date}</h1>
-                </div>
-            )
-        });
+        let userTickets;
+        if (this.state.userTickets) {
+            userTickets = this.state.userTickets.map(function (ticket, i) {
+                return (
+                    <Link to={{ pathname: '/dashboard/ticket/', query: ticket.ticket_id }} key={i}>
+                        <div>
+                            <h1>{ticket.ticket_id}</h1>
+                            <h1>{ticket.status}</h1>
+                            <h1>{ticket.subject}</h1>
+                            <h1>{ticket.tag}</h1>
+                            <h1>{ticket.description}</h1>
+                            <h1>{ticket.date}</h1>
+                        </div>
+                    </Link>
+                )
+            })
+        }
+
         return (
             <div className='mytickets_container'>
                 <h1>Tickets For {this.props.user.username}</h1>

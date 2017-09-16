@@ -1,8 +1,32 @@
 .submit-ticket_container {
-    height: 100vh;
-    width: 100%;
+    /* height: 87vh;
+    width: 100vw;
+    margin-left: 20vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center; */
+    width: 100%;
+    height: 100vh;
+    margin-left: 20vw;
+    display: flex;
+    justify-content: center;
     align-items: center;
+}
+
+.submit-ticket_overlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background: rgba(255, 255, 255, .9);
+    height: 80vh;
+    width: 92%;
+}
+
+.submit-ticket_topcontainer {
+    color: green;
+}
+.submit-ticket_bottomcontainer {
+    color: darkgray;
 }

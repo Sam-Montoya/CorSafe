@@ -81,15 +81,15 @@ app.get('/auth0/logout', (request, response) => {
 // ----------------------
 app.get('/api/getUserInfo', (request, response) => {
     response.status(200).send(request.user);
-});
+})
 app.post('/api/getUserById', (request, response) => {
     let DB = app.get('DB');
     serverController.getUserById(DB, request, response, request.body.auth_id);
-});
-app.get('/api/getAllTickets', (request, response) => {
+})
+app.post('/api/getAdminTickets', (request, response) => {
     let DB = app.get('DB');
-    serverController.getAllTickets(DB, request, response, request.body);
-});
+    serverController.getAdminTickets(DB, request, response, request.body.auth_id);
+})
 app.post('/api/getUserTickets', (request, response) => {
     let DB = app.get('DB');
     serverController.getUserTickets(DB, request, response, request.body.auth_id);
@@ -97,16 +97,16 @@ app.post('/api/getUserTickets', (request, response) => {
 app.post('/api/getTicketById', (request, response) => {
     let DB = app.get('DB');
     serverController.getTicketById(DB, request, response, request.body.ticket_id);
-});
+})
 app.post('/api/createTicket', (request, response) => {
     let DB = app.get('DB');
     serverController.createTicket(DB, response, request.body);
-});
-app.get('/api/updateTicketStatus', (request, response) => {
+})
+app.post('/api/updateTicketStatus', (request, response) => {
     let DB = app.get('DB');
-    let { ticket_id, status } = request.data;
-    serverController.updateTicketStatus(DB, request, response, status, request.params.auth_id);
-});
+    console.log(request.body);
+    serverController.updateTicketStatus(DB, request, response);
+})
 app.post('/api/postComment', (request, response) => {
     let DB = app.get('DB');
     if (request.user) {
@@ -114,11 +114,11 @@ app.post('/api/postComment', (request, response) => {
     } else {
         response.status(400).send('Bad Auth_ID');
     }
-});
+})
 app.post('/api/getComments', (request, response) => {
     let DB = app.get('DB');
     serverController.getComment(DB, request, response, request.body.ticket_id);
-});
+})
 // -----------------------
 // -   END
 // ----------------------

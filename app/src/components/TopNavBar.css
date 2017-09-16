@@ -1,0 +1,22 @@
+.top-navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 4vw;
+    height: 13vh;
+    background: rgba(12, 12, 12, .7);
+    color: white;
+}
+
+.top-navbar-logo {
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.top-navbar-text {
+    font-size: 40px;
+    width: 50%;
+    display: flex;
+    justify-content: flex-start
+}

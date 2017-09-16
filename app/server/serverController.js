@@ -16,21 +16,21 @@ module.exports = {
         })
     },
 
-    getAllTickets: (DB, response, auth_id) => {
+    getUserTickets: (DB, request, response, auth_id) => {
+        DB.get_user_tickets(auth_id).then(data => {
+            response.send(data);
+        })
+    },
+
+    getAdminTickets: (DB, request, response, auth_id) => {
         DB.find_user_role(auth_id).then((data) => {
             if (data[0].role === 'admin') {
                 DB.get_all_tickets().then((data) => {
                     response.status(200).send(data);
-                });
+                })
             } else {
                 response.send('Not Authenticated');
             }
-        })
-    },
-
-    getUserTickets: (DB, request, response, auth_id) => {
-        DB.get_user_tickets(auth_id).then(data => {
-            response.send(data);
         })
     },
 
@@ -41,28 +41,25 @@ module.exports = {
     },
 
     createTicket: (DB, response, ticketData) => {
-        let { auth_id, subject, status, tag, description } = ticketData;
+        let { auth_id, subject, status, tag, description, name } = ticketData;
         console.log(ticketData);
-
-        DB.create_ticket(auth_id, subject, status, tag, description).then(data => {
-            DB.init_comment(data[0].ticket_id).then(() => {
-                console.log('Created Comment Section');
+        if (auth_id) {
+            DB.create_ticket(auth_id, subject, status, tag, description, name).then(data => {
+                DB.init_comment(data[0].ticket_id).then(() => {
+                    console.log('Created Comment Section');
+                })
+                response.status(200).send(data);
             })
-            response.status(200).send(data);
-        })
+        } else {
+            response.status(200).send('Account not valid.');
+        }
     },
 
-    updateTicketStatus: (DB, response, ticketData, auth_id) => {
-        let { ticket_id, status } = ticketData;
+    updateTicketStatus: (DB, request, response) => {
+        let { ticket_id, newStatus } = request.body;
 
-        DB.find_user_role(auth_id).then((data) => {
-            if (data[0].role === 'admin') {
-                DB.update_ticket_status(ticket_id, status).then(data => {
-                    response.status(200).send(data);
-                });
-            } else {
-                response.send('Not Authenticated');
-            }
+        DB.update_ticket_status(ticket_id, newStatus).then(data => {
+            response.status(200).send('Ticket #' + ticket_id + ' has been changed to ' + newStatus);
         });
     },
 

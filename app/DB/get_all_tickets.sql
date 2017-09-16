@@ -1,1 +1,1 @@
-SELECT * FROM tickets;
+SELECT * FROM  tickets ORDER BY date DESC;

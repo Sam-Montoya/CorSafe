@@ -1,7 +1,40 @@
 .userdashboard_container {
-    height: 100vh;
-    width: 100%;
+    width: 100vw;
+    margin-left: 20vw;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.userdashboard_overlay {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* background: rgba(255, 255, 255, .9); */
+    height: 80vh;
+    width: 92%;
+}
+
+.user_buttons {
+    font-size: 3vh;
+    color: white;
+    background: rgb(93, 151, 156);
+    border: none;
+    width: 20vw;
+    height: 10vh;
+    cursor: pointer;
+}
+
+.userdashboard_buttoncontainers {
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    width: 20vw;
+}
+
+.container_images {
+    width: 13vw;
+    height: 24vh;
 }

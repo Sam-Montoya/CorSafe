@@ -1,7 +1,23 @@
 .sidenav_container {
-    height: 100vh;
-    width: 22vw;
-    background: gray;
-    filter: opacity(0.5);
+    height: 87vh;
+    width: 20vw;
+    background: rgba(12, 12, 12, .7);
     position: absolute;
+}
+
+
+.nav_container {
+    display: flex;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover 
+{
+     color:rgb(200, 200, 200); 
+     text-decoration:none; 
+     cursor:pointer;  
 }
