@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { updateCurrentUser } from '../ducks/user-reducer';
+import { updateCurrentUser, updateNavBarText } from '../ducks/user-reducer';
 
 import axiosController from '../../axiosController';
 
@@ -16,9 +16,10 @@ import './DashboardController.css';
 
 class DashboardController extends Component {
 
-    componentDidMount() {
+    componentWillMount() {
         axiosController.getUserInfo().then(userInfo => {
             this.props.updateCurrentUser(userInfo);
+            this.props.updateNavBarText('Welcome, ' + this.props.user.name);
         });
     }
 
@@ -43,4 +44,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { updateCurrentUser })(DashboardController);
+export default connect(mapStateToProps, { updateCurrentUser, updateNavBarText })(DashboardController);

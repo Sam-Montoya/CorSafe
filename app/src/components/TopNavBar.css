@@ -12,6 +12,7 @@
     width: 50%;
     display: flex;
     justify-content: flex-start;
+    /* margin-left: 3vw; */
 }
 
 .top-navbar-text {
