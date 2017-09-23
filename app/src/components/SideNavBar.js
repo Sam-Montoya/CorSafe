@@ -8,10 +8,26 @@ export default class SideNavBar extends Component {
         return (
             <div className='nav_container'>
                 <div className='sidenav_container'>
-                    <Link to='/dashboard'><h1>Home</h1></Link>
-                    <Link to='/dashboard/help'><h1>Help</h1></Link>
-                    <Link to='/dashboard/settings'><h1>Settings</h1></Link>
-                    <a href={process.env.REACT_APP_LOGOUT}><h1>Logout</h1></a>
+                    <div>
+                        <section>
+                            <span /><Link to='/dashboard'><h1>Home</h1></Link>
+                        </section>
+                    </div>
+                    <div>
+                        <section>
+                            <span /><Link to='/dashboard/help'><h1>Help</h1></Link>
+                        </section>
+                    </div>
+                    <div>
+                        <section>
+                            <span /><Link to='/dashboard/settings'><h1>Settings</h1></Link>
+                        </section>
+                    </div>
+                    <div>
+                        <section>
+                            <span /><a href={process.env.REACT_APP_LOGOUT}>Logout</a>
+                        </section>
+                    </div>
                 </div>
             </div>
         )

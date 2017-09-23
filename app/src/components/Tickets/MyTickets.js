@@ -27,6 +27,7 @@ class MyTickets extends Component {
                 userTickets: tickets
             })
         })
+        this.props.updateNavBarText('Your Tickets');
     }
 
     render() {
@@ -40,11 +41,27 @@ class MyTickets extends Component {
                                 <h1>{ticket.ticket_id}</h1></Link>
                         </section>
 
-                        
-                        <section>
-                            <h1>{ticket.status}</h1>
-                        </section>
-
+                        {ticket.status === 'Resolved'
+                            ?
+                            (
+                                <section className='mytickets_resolved'>
+                                    <h1>{ticket.status}</h1>
+                                </section>
+                            )
+                            :
+                            (ticket.status === 'Not Answered'
+                                ?
+                                (
+                                    <section className='mytickets_notanswered'>
+                                        <h1>{ticket.status}</h1>
+                                    </section>
+                                )
+                                :
+                                <section className='mytickets_inprogress'>
+                                    <h1>{ticket.status}</h1>
+                                </section>
+                            )
+                        }
                         <section className='mytickets_subjectcontainer'>
                             <Link to={{ pathname: '/dashboard/ticket/', query: ticket.ticket_id }} key={i}>
                                 <h1>{ticket.subject}</h1></Link>
@@ -64,7 +81,7 @@ class MyTickets extends Component {
                     </div>
                 )
             })
-        } 
+        }
 
         return (
             <div>
@@ -75,12 +92,32 @@ class MyTickets extends Component {
                         <h1>Search Preferences</h1>
                     </div>
                     <div className='mytickets_overlay'>
+                        <div className='mytickets_ticketcontainer'>
+                            <section className='mytickets_idcontainer'>
+                                <h1>ID</h1>
+                            </section>
 
-                    <div>
-                    
-                    </div>
+                            <section>
+                                <h1>Status</h1>
+                            </section>
+
+                            <section className='mytickets_subjectcontainer'>
+                                <h1>Subject</h1>
+                            </section>
+
+                            <section>
+                                <h1>Tag</h1>
+                            </section>
+
+                            <section>
+                                <h1>Name</h1>
+                            </section>
+
+                            <section>
+                                <h1>Time</h1>
+                            </section>
+                        </div>
                         {userTickets}
-                        <Link to='/dashboard'><button>Cancel</button></Link>
                     </div>
                 </div>
             </div>
@@ -94,4 +131,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(MyTickets);
+export default connect(mapStateToProps, { updateNavBarText })(MyTickets);

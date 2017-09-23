@@ -3,20 +3,35 @@
     width: 20vw;
     background: rgba(12, 12, 12, .7);
     position: absolute;
+    font-size: 20px;
 }
 
 .nav_container {
     display: flex;
 }
 
-a {
+.sidenav_container a {
     color: white;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
-a:hover 
+.nav_container a:hover 
 {
      color:rgb(200, 200, 200); 
-     text-decoration:none; 
+     text-decoration:none !important; 
      cursor:pointer;  
+}
+
+.sidenav_container section {
+    display: flex;
+    margin-top: 5vh;
+    margin-bottom: 10vh;
+    width: 10vw;
+}
+span {
+    width: 2vw;
+    border-bottom: .5px solid #ccc;
+    display: inline-block;
+    margin-bottom: 10px;
+    transition: all 0.5s;
 }
