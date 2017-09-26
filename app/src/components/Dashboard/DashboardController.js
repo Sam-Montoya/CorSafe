@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
 
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { updateCurrentUser, updateNavBarText } from '../ducks/user-reducer';
+import { updateCurrentUser, updateNavBarText, updateButtonClass } from '../ducks/user-reducer';
 
 import axiosController from '../../axiosController';
 
 import AdminDashboard from './AdminDashboard';
 import UserDashboard from './UserDashboard';
+import MyTickets from '../Tickets/MyTickets';
 
 import './DashboardController.css';
 
 class DashboardController extends Component {
 
-    componentWillMount() {
+    componentDidMount() {
         axiosController.getUserInfo().then(userInfo => {
             this.props.updateCurrentUser(userInfo);
-            this.props.updateNavBarText('Welcome, ' + this.props.user.name);
+            if (this.props.user.role === 'user')
+                this.props.updateNavBarText('Welcome, ' + this.props.user.name);
         });
+        this.props.updateButtonClass('top-navbar-hidebutton');
     }
 
     render() {
@@ -26,7 +29,7 @@ class DashboardController extends Component {
                 <Switch>
                     {this.props.user.role === 'admin'
                         ?
-                        <Route component={AdminDashboard} />
+                        <Redirect to='/dashboard/my-tickets' component={MyTickets} />
                         :
                         <Route component={UserDashboard} />}
                 </Switch>
@@ -41,4 +44,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { updateCurrentUser, updateNavBarText })(DashboardController);
+export default connect(mapStateToProps, { updateCurrentUser, updateNavBarText, updateButtonClass })(DashboardController);

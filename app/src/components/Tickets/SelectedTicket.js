@@ -6,7 +6,7 @@ import axiosController from '../../axiosController';
 
 import TopNavBar from '../TopNavBar';
 import SideNavBar from '../SideNavBar';
-import { updateNavBarText } from '../ducks/user-reducer';
+import { updateNavBarText, updateButtonStatus, updateButtonClass } from '../ducks/user-reducer';
 
 import './SelectedTicket.css';
 import './SubmitTicket';
@@ -37,7 +37,7 @@ class SelectedTicket extends Component {
         this.postComment = this.postComment.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         let commentInfo = {
             ticket_id: this.props.location.query,
             name: this.props.user.name,
@@ -55,6 +55,7 @@ class SelectedTicket extends Component {
                     selectedTicket: ticketInfo[0]
                 })
                 this.props.updateNavBarText('Ticket #' + ticketInfo[0].ticket_id);
+                this.updateNavButton(ticketInfo[0].status)
             }
         });
 
@@ -116,7 +117,18 @@ class SelectedTicket extends Component {
         axiosController.updateTicketStatus(this.state.selectedTicket.ticket_id, newStatus).then(response => {
             alert(response);
             this.updateTicketInfo();
+            this.updateNavButton(newStatus);
         })
+    }
+
+    updateNavButton(status) {
+        this.props.updateButtonStatus(status);
+        if (status === 'Resolved')
+            this.props.updateButtonClass('top-navbar-button-resolved');
+        else if (status === 'Not Answered')
+            this.props.updateButtonClass('top-navbar-button-notanswered');
+        else
+            this.props.updateButtonClass('top-navbar-button-inprogress');
     }
 
     render() {
@@ -167,7 +179,7 @@ class SelectedTicket extends Component {
                                     ?
                                     (
                                         <section className='cancelbutton_container'>
-                                            <Link to='/dashboard'><button className='submit-ticket_buttoncontainer_cancel'>Back</button></Link>
+                                            <Link to='/dashboard/my-tickets'><button className='submit-ticket_buttoncontainer_cancel'>Back</button></Link>
                                         </section>
                                     )
                                     :
@@ -179,7 +191,7 @@ class SelectedTicket extends Component {
                                             </section>
 
                                             <section className='selectedticket_cancelbutton'>
-                                                <Link to='/dashboard/my-tickets'><button >Back</button></Link>
+                                                <Link to='/dashboard/my-tickets'><button>Back</button></Link>
                                             </section>
                                         </div>
                                     )
@@ -199,41 +211,6 @@ class SelectedTicket extends Component {
                     </div>
                 </div>
             </div>
-
-
-            // <div className='selectedticket_container'>
-            //     <div className='selectedticket_overlay'>
-            //         {/* <h1>{this.state.selectedTicket.ticket_id}</h1>
-            //         <h1>{this.state.selectedTicket.status}</h1> */}
-            //         <h1>Submitted By: {this.state.selectedTicket.name}</h1>
-            //         <section className='selectedticket-topcontainer'>
-            //             <section className='selectedticket-subject'>
-            //                 <h1>Subject: {this.state.selectedTicket.subject}</h1>
-            //                 {/* <section className='selectedticket-subjectField'>
-            //                     <h1>{this.state.selectedTicket.subject}</h1>
-            //                 </section> */}
-            //             </section>
-            //             <section className='selectedticket-tag'>
-            //                 <h1>Tag: {this.state.selectedTicket.tag}</h1>
-            //                 {/* <section className='selectedticket-tagField'>
-            //                     <h1>{this.state.selectedTicket.tag}</h1>
-            //                 </section> */}
-            //             </section>
-            //         </section>
-
-            //         <section className='selectedticket-bottomcontainer'>
-            //             <h1>{this.state.selectedTicket.description}</h1>
-            //             <h1>{this.state.selectedTicket.date}</h1>
-            //         </section>
-
-
-
-            //         {allComments}
-
-            //         <textarea rows='6' cols='50' placeholder='details of the problem' id='submitarea' onChange={(input) => this.updateCommentBox(input.target.value)} />
-            //         <button onClick={() => this.postComment()}>Comment</button>
-            //     </div>
-            // </div>
         )
     }
 }
@@ -244,4 +221,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { updateNavBarText })(SelectedTicket);
+export default connect(mapStateToProps, { updateNavBarText, updateButtonStatus, updateButtonClass })(SelectedTicket);

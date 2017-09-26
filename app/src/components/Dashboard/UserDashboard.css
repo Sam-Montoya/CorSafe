@@ -15,11 +15,11 @@
 }
 
 .user_buttons {
-    font-size: 2vw;
+    font-size: 1.8vw;
     color: white;
     background: rgb(93, 151, 156);
     border: none;
-    width: 20vw;
+    width: 22vw;
     height: 5vw;
     cursor: pointer;
     box-shadow: 0px 2px 4px rgb(63, 63, 63);
@@ -31,11 +31,11 @@
     justify-content: center;
     align-items: center;
     height: 20vw;
-    width: 20vw;
+    width: 22vw;
     box-shadow: 0px 2px 4px rgb(63, 63, 63);
 }
 
 .container_images {
-    width: 13vw;
-    height: 13vw;
+    width: 11vw;
+    height: 11vw;
 }

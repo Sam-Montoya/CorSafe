@@ -21,8 +21,6 @@ class App extends Component {
           <Route path='/dashboard' render={() => {
             return (
               <div className='app_background'>
-                {/* <TopNavBar />
-                <SideNavBar /> */}
                 <Route exact path="/dashboard" component={DashboardController} />
                 <Switch>
                   <Route path="/dashboard/submit-ticket" component={SubmitTicket} />

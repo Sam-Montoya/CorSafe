@@ -8,7 +8,7 @@ import axiosController from '../../axiosController';
 import './MyTickets.css';
 import SideNavBar from '../SideNavBar.js';
 import TopNavBar from '../TopNavBar.js';
-import { updateNavBarText, updateUserTickets, updateFilteredTickets } from '../ducks/user-reducer';
+import { updateNavBarText, updateUserTickets, updateFilteredTickets, updateButtonClass } from '../ducks/user-reducer';
 
 import StatusMenu from '../SearchMenus/StatusMenu';
 import TagMenu from '../SearchMenus/TagMenu';
@@ -20,12 +20,20 @@ import moment from 'moment';
 
 class MyTickets extends Component {
 
-    componentWillMount() {
-        axiosController.getUserTickets(this.props.user.auth_id).then(tickets => {
-            this.props.updateUserTickets(tickets);
-            this.props.updateFilteredTickets(tickets);
-        })
+    componentDidMount() {
         this.props.updateNavBarText('Your Tickets');
+        this.props.updateButtonClass('top-navbar-hidebutton');
+        if (this.props.user.role === 'user') {
+            axiosController.getUserTickets(this.props.user.auth_id).then(tickets => {
+                this.props.updateUserTickets(tickets);
+                this.props.updateFilteredTickets(tickets);
+            })
+        } else {
+            axiosController.getAdminTickets('google-oauth2|108353722291765184973').then(adminTickets => {
+                this.props.updateUserTickets(adminTickets);
+                this.props.updateFilteredTickets(adminTickets);
+            })
+        }  
     }
 
     render() {
@@ -138,4 +146,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { updateNavBarText, updateUserTickets, updateFilteredTickets })(MyTickets);
+export default connect(mapStateToProps, { updateNavBarText, updateUserTickets, updateFilteredTickets, updateButtonClass })(MyTickets);

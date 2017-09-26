@@ -149,3 +149,8 @@
 .selectedticket_inprogress {
     background-color: darkorange !important;
 }
+
+.cancelbutton_container {
+    float: right;
+    margin-top: 2vh;
+}

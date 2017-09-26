@@ -1,7 +1,7 @@
 .top-navbar {
     display: flex;
-    justify-content: space-around;
     align-items: center;
+    justify-content: space-between;
     font-size: 4vw;
     height: 13vh;
     background: rgba(12, 12, 12, .7);
@@ -9,15 +9,40 @@
 }
 
 .top-navbar-logo {
-    width: 50%;
+    margin-left: 1vw;
     display: flex;
-    justify-content: flex-start;
-    /* margin-left: 3vw; */
+    justify-content: center;
+    align-items: center;
 }
 
 .top-navbar-text {
-    font-size: 40px;
-    width: 50%;
+    font-size: 6vh;
     display: flex;
-    justify-content: flex-start
+    justify-content: center;
+    align-items: center;
+}
+
+.top-navbar-ticketstatus section {
+    margin-right: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5vw;
+    height: 8vh;
+    width: 12vw;
+    font-weight: lighter;
+}
+
+.top-navbar-button-resolved {
+    background-color: #3CB371;
+}
+.top-navbar-button-notanswered {
+    background-color: #696969;
+}
+.top-navbar-button-inprogress {
+    background-color: darkorange;
+}
+
+.top-navbar-hidebutton {
+    visibility: hidden;
 }
