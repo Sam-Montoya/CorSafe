@@ -42,7 +42,6 @@ module.exports = {
 
     createTicket: (DB, response, ticketData) => {
         let { auth_id, subject, status, tag, description, name } = ticketData;
-        console.log(ticketData);
         if (auth_id) {
             DB.create_ticket(auth_id, subject, status, tag, description, name).then(data => {
                 DB.init_comment(data[0].ticket_id).then(() => {

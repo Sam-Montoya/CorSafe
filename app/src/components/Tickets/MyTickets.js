@@ -8,36 +8,34 @@ import axiosController from '../../axiosController';
 import './MyTickets.css';
 import SideNavBar from '../SideNavBar.js';
 import TopNavBar from '../TopNavBar.js';
-import { updateNavBarText } from '../ducks/user-reducer';
+import { updateNavBarText, updateUserTickets, updateFilteredTickets } from '../ducks/user-reducer';
+
+import StatusMenu from '../SearchMenus/StatusMenu';
+import TagMenu from '../SearchMenus/TagMenu';
+import IdMenu from '../SearchMenus/IdMenu';
+import DateMenu from '../SearchMenus/DateMenu';
+import SearchField from '../SearchMenus/SearchField';
 
 import moment from 'moment';
 
 class MyTickets extends Component {
-    constructor() {
-        super();
-
-        this.state = {
-            userTickets: []
-        }
-    }
 
     componentWillMount() {
         axiosController.getUserTickets(this.props.user.auth_id).then(tickets => {
-            this.setState({
-                userTickets: tickets
-            })
+            this.props.updateUserTickets(tickets);
+            this.props.updateFilteredTickets(tickets);
         })
         this.props.updateNavBarText('Your Tickets');
     }
 
     render() {
         let userTickets;
-        if (this.state.userTickets) {
-            userTickets = this.state.userTickets.map(function (ticket, i) {
+        if (this.props.user.userTickets) {
+            userTickets = this.props.user.filteredTickets.map(function (ticket, i) {
                 return (
-                    <div className='mytickets_ticketcontainer'>
+                    <div className='mytickets_ticketcontainer' key={i}>
                         <section className='mytickets_idcontainer'>
-                            <Link to={{ pathname: '/dashboard/ticket/', query: ticket.ticket_id }} key={i}>
+                            <Link to={{ pathname: '/dashboard/ticket/', query: ticket.ticket_id }}>
                                 <h1>{ticket.ticket_id}</h1></Link>
                         </section>
 
@@ -68,7 +66,12 @@ class MyTickets extends Component {
                         </section>
 
                         <section>
-                            <h1>{ticket.tag}</h1>
+                            {ticket.tag === 'Critical'
+                                ?
+                                <h1 style={{ color: 'red' }}>{ticket.tag}</h1>
+                                :
+                                <h1>{ticket.tag}</h1>
+                            }
                         </section>
 
                         <section>
@@ -89,7 +92,11 @@ class MyTickets extends Component {
                 <SideNavBar />
                 <div className='mytickets_container'>
                     <div className='mytickets_search'>
-                        <h1>Search Preferences</h1>
+                        <StatusMenu />
+                        <TagMenu />
+                        <IdMenu />
+                        <DateMenu />
+                        <SearchField />
                     </div>
                     <div className='mytickets_overlay'>
                         <div className='mytickets_ticketcontainer'>
@@ -131,4 +138,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { updateNavBarText })(MyTickets);
+export default connect(mapStateToProps, { updateNavBarText, updateUserTickets, updateFilteredTickets })(MyTickets);

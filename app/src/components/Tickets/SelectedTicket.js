@@ -6,6 +6,7 @@ import axiosController from '../../axiosController';
 
 import TopNavBar from '../TopNavBar';
 import SideNavBar from '../SideNavBar';
+import { updateNavBarText } from '../ducks/user-reducer';
 
 import './SelectedTicket.css';
 import './SubmitTicket';
@@ -36,7 +37,7 @@ class SelectedTicket extends Component {
         this.postComment = this.postComment.bind(this);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         let commentInfo = {
             ticket_id: this.props.location.query,
             name: this.props.user.name,
@@ -53,8 +54,10 @@ class SelectedTicket extends Component {
                 this.setState({
                     selectedTicket: ticketInfo[0]
                 })
+                this.props.updateNavBarText('Ticket #' + ticketInfo[0].ticket_id);
             }
         });
+
         axiosController.getComments(this.props.location.query).then(comments => {
             if (comments[0]) {
                 this.setState({
@@ -96,11 +99,16 @@ class SelectedTicket extends Component {
         if (this.state.selectedTicket.ticket_id === 0) {
             alert('No Valid Ticket Selected')
         } else {
-            axiosController.postComment(this.state.postComment).then(() => {
-                this.updateComments();
-            });
+            if (this.props.user.auth_id) {
+                axiosController.postComment(this.state.postComment).then(() => {
+                    this.updateComments();
+                });
 
-            document.getElementById('submitarea').value = '';
+
+                document.getElementById('submitarea').value = '';
+            } else {
+                alert('Not Logged In!');
+            }
         }
     }
 
@@ -117,10 +125,14 @@ class SelectedTicket extends Component {
             allComments = this.state.comments.map(function (data, i) {
                 return (
                     <div className='comment_container' key={i}>
-                        <h1>{data.name}</h1>
-                        <img className='comment_profilepic' src={data.profile_pic} alt='' />
-                        <h1>{data.comment}</h1>
-                        <h1>{data.user_id}</h1>
+                        <section className='comment_userinfo'>
+                            <img className='comment_profilepic' src={data.profile_pic} alt='' />
+                            <h2>{data.name}</h2>
+                        </section>
+
+                        <section className='comment_commentconainer'>
+                            <h2>{data.comment}</h2>
+                        </section>
                     </div>
                 )
             });
@@ -130,9 +142,9 @@ class SelectedTicket extends Component {
             <div>
                 <TopNavBar />
                 <SideNavBar />
-                <div className='submit-ticket_container'>
+                <div className='selectedticket_container'>
                     <div className='selectedticket_overlay'>
-                        <div className='submit-ticket_ticketcontents'>
+                        <div className='selected-ticket_ticketcontents'>
                             <div className='submit-ticket_topcontainer'>
                                 <section className='submit-ticket_subjectcontainer'>
                                     <h1>Subject</h1>
@@ -149,13 +161,40 @@ class SelectedTicket extends Component {
                                 <h1>Description</h1>
                                 <textarea rows='6' cols='50' value={this.state.selectedTicket.description} disabled />
                             </section>
+
+                            <section>
+                                {this.props.user.role === 'user'
+                                    ?
+                                    (
+                                        <section className='cancelbutton_container'>
+                                            <Link to='/dashboard'><button className='submit-ticket_buttoncontainer_cancel'>Back</button></Link>
+                                        </section>
+                                    )
+                                    :
+                                    (
+                                        <div className='selectedticket_buttons'>
+                                            <section className='adminbuttons_container'>
+                                                <button className='selectedticket_resolved' onClick={() => this.updateTicketStatus('Resolved')}>Resolved</button>
+                                                <button className='selectedticket_inprogress' onClick={() => this.updateTicketStatus('In-Progress')}>In-Progress</button>
+                                            </section>
+
+                                            <section className='selectedticket_cancelbutton'>
+                                                <Link to='/dashboard/my-tickets'><button >Back</button></Link>
+                                            </section>
+                                        </div>
+                                    )
+                                }
+                            </section>
                         </div>
+
 
                         <div className='selected-ticket_comments'>
                             {allComments}
 
-                            <textarea rows='6' cols='50' placeholder='details of the problem' id='submitarea' onChange={(input) => this.updateCommentBox(input.target.value)} />
-                            <button onClick={() => this.postComment()}>Comment</button>
+                            <textarea rows='6' cols='50' placeholder='Enter A Comment...' id='submitarea' onChange={(input) => this.updateCommentBox(input.target.value)} />
+                            <section className='selectedticket-submitcontainer'>
+                                <button className='selected-ticket_commentbutton' onClick={() => this.postComment()}>Comment</button>
+                            </section>
                         </div>
                     </div>
                 </div>
@@ -187,19 +226,7 @@ class SelectedTicket extends Component {
             //             <h1>{this.state.selectedTicket.date}</h1>
             //         </section>
 
-            //         {this.props.user.role === 'user'
-            //             ?
-            //             (<Link to='/dashboard/my-tickets'><button>Back</button></Link>)
-            //             :
-            //             (
-            //                 <div>
-            //                     <button onClick={() => this.updateTicketStatus('Resolved')}>Resolved</button>
-            //                     <button onClick={() => this.updateTicketStatus('In-Progress')}>In-Progress</button>
-            //                     <button onClick={() => this.updateTicketStatus('Not Answered')}>Not Answered</button>
-            //                     <Link to='/dashboard'><button>Cancel</button></Link>
-            //                 </div>
-            //             )
-            //         }
+
 
             //         {allComments}
 
@@ -217,4 +244,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(SelectedTicket);
+export default connect(mapStateToProps, { updateNavBarText })(SelectedTicket);

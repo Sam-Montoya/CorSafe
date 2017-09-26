@@ -6,8 +6,6 @@ import { Route, Switch } from 'react-router-dom';
 
 import Home from './components/Home/Home';
 import DashboardController from './components/Dashboard/DashboardController';
-import SideNavBar from './components/SideNavBar';
-import TopNavBar from './components/TopNavBar';
 import UserSettings from './components/Settings/UserSettings';
 import SubmitTicket from './components/Tickets/SubmitTicket';
 import MyTickets from './components/Tickets/MyTickets';

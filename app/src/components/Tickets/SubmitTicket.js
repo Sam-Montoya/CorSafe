@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import './SubmitTicket.css';
 
-import axiosController from '../../axiosController';
 
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -10,6 +9,8 @@ import { connect } from 'react-redux';
 import SideNavBar from '../SideNavBar.js';
 import TopNavBar from '../TopNavBar.js';
 import { updateNavBarText } from '../ducks/user-reducer';
+
+import Alerts from '../Alerts';
 
 class SubmitTicket extends Component {
     constructor() {
@@ -21,8 +22,9 @@ class SubmitTicket extends Component {
             status: 'Not Answered',
             tag: 'Normal',
             description: '',
-            name: ''
+            name: '',
         }
+
     }
 
     componentWillMount() {
@@ -34,6 +36,7 @@ class SubmitTicket extends Component {
     }
 
     render() {
+
         return (
             <div>
                 <TopNavBar />
@@ -46,7 +49,6 @@ class SubmitTicket extends Component {
                                     <h1>Subject</h1>
                                     <input type='text' placeholder='Subject' ref='subjectField' onChange={(input) => this.setState({ subject: input.target.value })} />
                                 </section>
-
                                 <section className='submit-ticket_tagcontainer'>
                                     <h1>Tag</h1>
                                     <select value={this.state.tag} onChange={(selected) => this.setState({ tag: selected.target.value })}>
@@ -62,8 +64,8 @@ class SubmitTicket extends Component {
                             </section>
 
                             <section className='submit-ticket_buttoncontainer'>
-                                <button className='submit' raised onClick={() => axiosController.createTicket(this.state)}>Submit</button>
-                                <Link to='/dashboard'><button className='submit-ticket_buttoncontainer_cancel' raised>Cancel</button></Link>
+                                <Alerts ticket={this.state}/>
+                                <Link to='/dashboard'><button className='submit-ticket_buttoncontainer_cancel'>Cancel</button></Link>
                             </section>
                         </div>
                     </div>

@@ -9,9 +9,6 @@ import axiosController from '../../axiosController';
 import AdminDashboard from './AdminDashboard';
 import UserDashboard from './UserDashboard';
 
-import SubmitTicket from '../Tickets/SubmitTicket';
-import MyTickets from '../Tickets/MyTickets';
-
 import './DashboardController.css';
 
 class DashboardController extends Component {

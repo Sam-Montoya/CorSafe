@@ -26,10 +26,16 @@
     display: flex;
     margin-top: 5vh;
     margin-bottom: 10vh;
-    width: 10vw;
+    width: 12vw;
+    transition: all 0.3s;
 }
+
+.sidenav_container section:hover {
+    width: 14vw;
+}
+
 span {
-    width: 2vw;
+    width: 30%;
     border-bottom: .5px solid #ccc;
     display: inline-block;
     margin-bottom: 10px;

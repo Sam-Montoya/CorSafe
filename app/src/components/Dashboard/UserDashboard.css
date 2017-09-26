@@ -15,12 +15,12 @@
 }
 
 .user_buttons {
-    font-size: 3vh;
+    font-size: 2vw;
     color: white;
     background: rgb(93, 151, 156);
     border: none;
     width: 20vw;
-    height: 10vh;
+    height: 5vw;
     cursor: pointer;
     box-shadow: 0px 2px 4px rgb(63, 63, 63);
 }
@@ -30,12 +30,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 40vh;
+    height: 20vw;
     width: 20vw;
     box-shadow: 0px 2px 4px rgb(63, 63, 63);
 }
 
 .container_images {
     width: 13vw;
-    height: 24vh;
+    height: 13vw;
 }
