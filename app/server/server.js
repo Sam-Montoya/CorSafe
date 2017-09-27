@@ -102,18 +102,17 @@ app.post('/api/createTicket', (request, response) => {
     let DB = app.get('DB');
     serverController.createTicket(DB, response, request.body);
 })
-app.post('/api/updateTicketStatus', (request, response) => {
+app.delete('/api/deleteTicket/:ticket_id', (request, response) => {
     let DB = app.get('DB');
-    console.log(request.body);
+    serverController.deleteTicket(DB, request, response, request.params.ticket_id);
+})
+app.patch('/api/updateTicketStatus', (request, response) => {
+    let DB = app.get('DB');
     serverController.updateTicketStatus(DB, request, response);
 })
 app.post('/api/postComment', (request, response) => {
     let DB = app.get('DB');
-    if (request.user) {
-        serverController.postComment(DB, request, response, request.body, request.user.auth_id);
-    } else {
-        response.status(400).send('Bad Auth_ID');
-    }
+    serverController.postComment(DB, request, response, request.body, request.body.auth_id);
 })
 app.post('/api/getComments', (request, response) => {
     let DB = app.get('DB');

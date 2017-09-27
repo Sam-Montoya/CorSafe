@@ -1,8 +1,7 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
 import { InputLabel } from 'material-ui/Input';
 import { MenuItem } from 'material-ui/Menu';
-import { FormControl, FormHelperText } from 'material-ui/Form';
+import { FormControl } from 'material-ui/Form';
 import Select from 'material-ui/Select';
 import { connect } from 'react-redux';
 import { updateUserTickets, updateFilteredTickets } from '../ducks/user-reducer';

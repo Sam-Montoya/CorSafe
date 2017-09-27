@@ -27,6 +27,12 @@ module.exports = {
         })
     },
 
+    deleteTicket: (ticket_id) => {
+        return axios.delete('/api/deleteTicket/' + ticket_id).then(response => {
+            return response.data;
+        })
+    },
+
     getUserTickets: (auth_id) => {
         let user_auth_id = { auth_id: auth_id }
 
@@ -53,7 +59,7 @@ module.exports = {
 
     updateTicketStatus: (ticket_id, newStatus) => {
         let ticketData = { ticket_id: ticket_id, newStatus: newStatus }
-        return axios.post('/api/updateTicketStatus', ticketData).then(response => {
+        return axios.patch('/api/updateTicketStatus', ticketData).then(response => {
             return response.data;
         })
     },

@@ -8,6 +8,8 @@ import TopNavBar from '../TopNavBar';
 import SideNavBar from '../SideNavBar';
 import { updateNavBarText, updateButtonStatus, updateButtonClass } from '../ducks/user-reducer';
 
+import AlertDelete from '../AlertDelete';
+
 import './SelectedTicket.css';
 import './SubmitTicket';
 
@@ -60,6 +62,7 @@ class SelectedTicket extends Component {
         });
 
         axiosController.getComments(this.props.location.query).then(comments => {
+            console.log(comments[0]);
             if (comments[0]) {
                 this.setState({
                     comments: comments[0].comments
@@ -134,6 +137,7 @@ class SelectedTicket extends Component {
     render() {
         var allComments;
         if (this.state.comments) {
+            console.log(this.state.comments);
             allComments = this.state.comments.map(function (data, i) {
                 return (
                     <div className='comment_container' key={i}>
@@ -188,6 +192,7 @@ class SelectedTicket extends Component {
                                             <section className='adminbuttons_container'>
                                                 <button className='selectedticket_resolved' onClick={() => this.updateTicketStatus('Resolved')}>Resolved</button>
                                                 <button className='selectedticket_inprogress' onClick={() => this.updateTicketStatus('In-Progress')}>In-Progress</button>
+                                                <AlertDelete ticket={this.state.selectedTicket} />
                                             </section>
 
                                             <section className='selectedticket_cancelbutton'>
@@ -202,8 +207,13 @@ class SelectedTicket extends Component {
 
                         <div className='selected-ticket_comments'>
                             {allComments}
+                            <div className='comment_container'>
+                                <section className='comment_userinfo'>
+                                    <img className='comment_profilepic' src={this.props.user.profilepic} alt='' />
+                                </section>
 
-                            <textarea rows='6' cols='50' placeholder='Enter A Comment...' id='submitarea' onChange={(input) => this.updateCommentBox(input.target.value)} />
+                                <textarea placeholder='Enter a comment...' id='submitarea' onChange={(input) => this.updateCommentBox(input.target.value)} className='comment_commentconainer' />
+                            </div>
                             <section className='selectedticket-submitcontainer'>
                                 <button className='selected-ticket_commentbutton' onClick={() => this.postComment()}>Comment</button>
                             </section>

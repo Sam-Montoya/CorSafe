@@ -1,10 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import MenuItem from 'material-ui/Menu/MenuItem';
 import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux';
-import _ from 'underscore';
 
 import { updateUserTickets, updateFilteredTickets } from '../ducks/user-reducer';
 
@@ -16,13 +12,14 @@ class SearchField extends React.Component {
             if (element.subject.toLowerCase().includes(input.target.value.toLowerCase())) {
                 tempTickets.push(element)
             }
+            return true;
         });
         this.props.updateFilteredTickets(tempTickets);
     };
 
     render() {
         return (
-            <form style={{ width: '12vw', margin: '1vh 0 0 2vw'}}>
+            <form style={{ width: '12vw', margin: '1vh 0 0 2vw', marginTop: '2.5vh'}}>
                 <TextField
                     id="helperText"
                     label="Search"

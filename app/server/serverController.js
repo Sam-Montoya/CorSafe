@@ -54,6 +54,12 @@ module.exports = {
         }
     },
 
+    deleteTicket: (DB, request, response, ticket_id) => {
+        DB.delete_ticket(ticket_id).then(data => {
+            response.status(200).send('Ticket Deleted.');
+        })
+    },
+
     updateTicketStatus: (DB, request, response) => {
         let { ticket_id, newStatus } = request.body;
 

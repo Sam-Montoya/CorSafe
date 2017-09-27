@@ -6,7 +6,6 @@ import { updateCurrentUser, updateNavBarText, updateButtonClass } from '../ducks
 
 import axiosController from '../../axiosController';
 
-import AdminDashboard from './AdminDashboard';
 import UserDashboard from './UserDashboard';
 import MyTickets from '../Tickets/MyTickets';
 
