@@ -5,6 +5,13 @@ import ClockImage from '../../images/Clock.png';
 import ChartImage from '../../images/Improve.png';
 import './Home.css';
 export default class Home extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            contactText: null
+        }
+    }
     render() {
         return (
             <div className='home_container'>
@@ -13,7 +20,7 @@ export default class Home extends Component {
 
                     <section className='home_header_right'>
                         <h2>Why Us</h2>
-                        <h2>Contact</h2>
+                        <a onClick={() => document.getElementById('contactme').scrollIntoView()}>Contact</a>
                         <a href={process.env.REACT_APP_LOGIN}><button>Log In</button></a>
                     </section>
                 </section>
@@ -62,6 +69,32 @@ export default class Home extends Component {
                     <section className='home_bottomcontainer'>
                         <a href={process.env.REACT_APP_LOGIN}><button>Create Free Account</button></a>
                     </section>
+
+                    <div id='contactme' className='home_contactcontainer'>
+                        <section>
+                            <h1>Contact</h1>
+                        </section>
+
+                        <div className='home_contactsquares'>
+
+                            <a target="_blank" href='https://github.com/Sam-Montoya?tab=repositories'><section className='home_github'>
+                                <i className="fa fa-github fa-5x" aria-hidden="true" />
+                            </section></a>
+
+                            <section className='home_email' onClick={() => this.setState({ contactText: 'samuel.montoya1073@gmail.com' })}>
+                                <i className="fa fa-envelope-o fa-5x" aria-hidden="true" />
+                            </section>
+
+                            <section className='home_phone' onClick={() => this.setState({ contactText: '801-879-7527' })}>
+                                <i className="fa fa-phone fa-5x" aria-hidden="true" />
+                            </section>
+
+                            <a target="_blank" href='https://www.facebook.com/wheatly.montoya'><section className='home_facebook'>
+                                <i className="fa fa-facebook fa-5x" aria-hidden="true" />
+                            </section></a>
+                        </div>
+                        <h1>{this.state.contactText}</h1>
+                    </div>
                 </div>
             </div>
         )
