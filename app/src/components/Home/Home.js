@@ -9,10 +9,23 @@ export default class Home extends Component {
         super();
 
         this.state = {
-            contactText: null
+            contactText: ''
         }
     }
+
+    test(selected) {
+        switch (selected) {
+            case 1:
+                this.setState({ contactText: '801-879-7527' });
+                break;
+            case 2:
+                this.setState({ contactText: 'samuel.montoya1073@gmail.com' });
+                break;
+        }
+    }
+
     render() {
+
         return (
             <div className='home_container'>
                 <section className='home_header'>
@@ -81,11 +94,11 @@ export default class Home extends Component {
                                 <i className="fa fa-github fa-5x" aria-hidden="true" />
                             </section></a>
 
-                            <section className='home_email' onClick={() => this.setState({ contactText: 'samuel.montoya1073@gmail.com' })}>
+                            <section className='home_email' onClick={() => this.test(2)}>
                                 <i className="fa fa-envelope-o fa-5x" aria-hidden="true" />
                             </section>
 
-                            <section className='home_phone' onClick={() => this.setState({ contactText: '801-879-7527' })}>
+                            <section className='home_phone' onClick={() => this.test(1)}>
                                 <i className="fa fa-phone fa-5x" aria-hidden="true" />
                             </section>
 
@@ -93,7 +106,12 @@ export default class Home extends Component {
                                 <i className="fa fa-facebook fa-5x" aria-hidden="true" />
                             </section></a>
                         </div>
-                        <h1>{this.state.contactText}</h1>
+                        {this.state.contactText === '801-879-7527'
+                            ?
+                            <h1 className='contact_text'>{this.state.contactText}</h1>
+                            :
+                            <h1 className='contact_text2'>{this.state.contactText}</h1>
+                        }
                     </div>
                 </div>
             </div>

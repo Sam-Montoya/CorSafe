@@ -100,9 +100,9 @@ class MyTickets extends Component {
                 <SideNavBar />
                 <div className='mytickets_container'>
                     <div className='mytickets_search'>
+                        <IdMenu />
                         <StatusMenu />
                         <TagMenu />
-                        <IdMenu />
                         <DateMenu />
                         <SearchField />
                     </div>
