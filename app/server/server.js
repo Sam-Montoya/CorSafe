@@ -98,6 +98,10 @@ app.post('/api/getTicketById', (request, response) => {
     let DB = app.get('DB');
     serverController.getTicketById(DB, request, response, request.body.ticket_id);
 })
+app.get('/api/getTicketCount/:auth_id', (request, response) => {
+    let DB = app.get('DB');
+    serverController.getTicketCount(DB, request, response, request.params.auth_id);
+})
 app.post('/api/createTicket', (request, response) => {
     let DB = app.get('DB');
     serverController.createTicket(DB, response, request.body);

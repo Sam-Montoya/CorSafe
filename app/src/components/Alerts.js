@@ -20,14 +20,10 @@ class Alerts extends React.Component {
     handleClickOpen = () => {
         if (this.props.ticket.description && this.props.ticket.subject) {
             createTicket(this.props.ticket);
-            // window.location.assign('/#/dashboard/my-tickets');
 
             this.setState({
                 shouldRedirect: true
             })
-            
-
-
         } else
             this.setState({ open: true });
     };
@@ -38,7 +34,7 @@ class Alerts extends React.Component {
 
 
     render() {
-        if(this.state.shouldRedirect) {
+        if (this.state.shouldRedirect) {
             return <Redirect to="/dashboard/my-tickets" />
         }
 

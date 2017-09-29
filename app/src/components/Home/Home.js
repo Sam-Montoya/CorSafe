@@ -13,17 +13,6 @@ export default class Home extends Component {
         }
     }
 
-    test(selected) {
-        switch (selected) {
-            case 1:
-                this.setState({ contactText: '801-879-7527' });
-                break;
-            case 2:
-                this.setState({ contactText: 'samuel.montoya1073@gmail.com' });
-                break;
-        }
-    }
-
     render() {
 
         return (
@@ -32,7 +21,7 @@ export default class Home extends Component {
                     <h1 style={{ fontWeight: "light" }}>cor<strong style={{ fontWeight: "bolder" }}>safe</strong></h1>
 
                     <section className='home_header_right'>
-                        <h2>Why Us</h2>
+                        <a onClick={() => document.getElementById('whyus').scrollIntoView()}>Why Us</a>
                         <a onClick={() => document.getElementById('contactme').scrollIntoView()}>Contact</a>
                         <a href={process.env.REACT_APP_LOGIN}><button>Log In</button></a>
                     </section>
@@ -55,7 +44,7 @@ export default class Home extends Component {
                         </section>
                     </div>
 
-                    <section className='home_whyuscontainer'>
+                    <section id='whyus' className='home_whyuscontainer'>
                         <div className='home_whyustext'>
                             <h2>Why Us?</h2>
                             <h1>Simplicity</h1>
@@ -90,23 +79,23 @@ export default class Home extends Component {
 
                         <div className='home_contactsquares'>
 
-                            <a target="_blank" href='https://github.com/Sam-Montoya?tab=repositories'><section className='home_github'>
+                            <a target="_blank" rel='noopener noreferrer' href='https://github.com/Sam-Montoya?tab=repositories'><section className='home_github'>
                                 <i className="fa fa-github fa-5x" aria-hidden="true" />
                             </section></a>
 
-                            <section className='home_email' onClick={() => this.test(2)}>
+                            <section className='home_email' onClick={() => this.setState({ contactText: 'samuel.montoya1073@gmail.com' })}>
                                 <i className="fa fa-envelope-o fa-5x" aria-hidden="true" />
                             </section>
 
-                            <section className='home_phone' onClick={() => this.test(1)}>
+                            <section className='home_phone' onClick={() => this.setState({ contactText: '801-879-7527' })}>
                                 <i className="fa fa-phone fa-5x" aria-hidden="true" />
                             </section>
 
-                            <a target="_blank" href='https://www.facebook.com/wheatly.montoya'><section className='home_facebook'>
+                            <a target="_blank" rel='noopener noreferrer' href='https://www.facebook.com/wheatly.montoya'><section className='home_facebook'>
                                 <i className="fa fa-facebook fa-5x" aria-hidden="true" />
                             </section></a>
                         </div>
-                        {this.state.contactText === '801-879-7527'
+                        {this.state.contactText
                             ?
                             <h1 className='contact_text'>{this.state.contactText}</h1>
                             :
@@ -114,7 +103,7 @@ export default class Home extends Component {
                         }
                     </div>
                 </div>
-            </div>
+            </div >
         )
     }
 }

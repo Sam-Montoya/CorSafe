@@ -6,6 +6,7 @@
     height: 13vh;
     background: rgba(12, 12, 12, .7);
     color: white;
+    border-bottom: 1px solid lightgray;
 }
 
 .top-navbar-logo {

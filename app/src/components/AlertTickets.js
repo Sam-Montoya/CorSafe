@@ -7,15 +7,22 @@ import Dialog, {
     DialogTitle,
 } from 'material-ui/Dialog';
 
-import { deleteTicket } from '../axiosController';
+import { createTicket } from '../axiosController';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 
-class AlertDelete extends React.Component {
+class AlertTickets extends React.Component {
     state = {
         open: false,
-        shouldRedirect: false
+        ticketMessage: ''
     };
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            open: nextProps.isOpen,
+            ticketMessage: nextProps.message
+        })
+    }
 
     handleClickOpen = () => {
         this.setState({ open: true });
@@ -25,33 +32,20 @@ class AlertDelete extends React.Component {
         this.setState({ open: false });
     };
 
-    deleteSelectedTicket() {
-        deleteTicket(this.props.ticket.ticket_id);
-        this.setState({
-            shouldRedirect: true
-        })
-    }
-    render() {
-        if(this.state.shouldRedirect) {
-            return <Redirect to="/dashboard/my-tickets" />
-        }
 
+    render() {
         return (
             <div>
-                <button className='selectedticket_delete' onClick={this.handleClickOpen}>Delete</button>
                 <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
-                    <DialogTitle>{"Are you sure you want to delete this ticket?"}</DialogTitle>
+                    <DialogTitle>{'Ticket Status'}</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            Once tickets are deleted, they are never coming back.
+                            {this.state.ticketMessage}
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={() => this.deleteSelectedTicket()} color="primary">
-                            Yes
-                        </Button>
                         <Button onClick={this.handleRequestClose} color="primary">
-                            Cancel
+                            Okay
                         </Button>
                     </DialogActions>
                 </Dialog>
@@ -65,4 +59,4 @@ function mapStateToProps(state) {
         user: state
     }
 }
-export default connect(mapStateToProps)(AlertDelete);
+export default connect(mapStateToProps)(AlertTickets);

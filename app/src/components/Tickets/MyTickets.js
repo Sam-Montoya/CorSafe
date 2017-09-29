@@ -109,27 +109,27 @@ class MyTickets extends Component {
                     <div className='mytickets_overlay'>
                         <div className='mytickets_ticketcontainer'>
                             <section className='mytickets_idcontainer'>
-                                <h1>ID</h1>
+                                <h1 style={{fontWeight: 'bold'}}>ID</h1>
                             </section>
 
                             <section>
-                                <h1>Status</h1>
+                                <h1 style={{fontWeight: 'bold'}}>Status</h1>
                             </section>
 
                             <section className='mytickets_subjectcontainer'>
-                                <h1>Subject</h1>
+                                <h1 style={{fontWeight: 'bold'}}>Subject</h1>
                             </section>
 
                             <section>
-                                <h1>Tag</h1>
+                                <h1 style={{fontWeight: 'bold'}}>Tag</h1>
                             </section>
 
                             <section>
-                                <h1>Name</h1>
+                                <h1 style={{fontWeight: 'bold'}}>Name</h1>
                             </section>
 
                             <section>
-                                <h1>Time</h1>
+                                <h1 style={{fontWeight: 'bold'}}>Time</h1>
                             </section>
                         </div>
                         {userTickets}

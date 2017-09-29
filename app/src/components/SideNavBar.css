@@ -1,6 +1,6 @@
 .sidenav_container {
     height: 87vh;
-    width: 18vw;
+    width: 16vw;
     background: rgba(12, 12, 12, .7);
     position: absolute;
     font-size: 2.5vh;
@@ -24,8 +24,8 @@
 
 .sidenav_container section {
     display: flex;
-    margin-top: 5vh;
-    margin-bottom: 10vh;
+    align-items: center;
+    margin-top: 10vh;
     width: 12vw;
     transition: all 0.3s;
 }
@@ -36,6 +36,7 @@
 
 .sidenav_container span {
     width: 30%;
+    height: 10px;
     border-bottom: .5px solid #ccc;
     display: inline-block;
     margin-bottom: 10px;

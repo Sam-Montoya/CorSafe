@@ -57,6 +57,12 @@ module.exports = {
         })
     },
 
+    getTicketCount: (auth_id) => {
+        return axios.get('/api/getTicketCount/' + auth_id).then(response => {
+            return response.data;
+        })
+    },
+
     updateTicketStatus: (ticket_id, newStatus) => {
         let ticketData = { ticket_id: ticket_id, newStatus: newStatus }
         return axios.patch('/api/updateTicketStatus', ticketData).then(response => {

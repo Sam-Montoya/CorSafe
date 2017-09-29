@@ -9,6 +9,7 @@ import SideNavBar from '../SideNavBar';
 import { updateNavBarText, updateButtonStatus, updateButtonClass } from '../ducks/user-reducer';
 
 import AlertDelete from '../AlertDelete';
+import AlertTickets from '../AlertTickets';
 
 import './SelectedTicket.css';
 import './SubmitTicket';
@@ -34,7 +35,9 @@ class SelectedTicket extends Component {
                 auth_id: '',
                 comment: ''
             },
-            comments: []
+            comments: [],
+            isOpen: false,
+            ticketMessage: ''
         }
         this.postComment = this.postComment.bind(this);
     }
@@ -62,7 +65,6 @@ class SelectedTicket extends Component {
         });
 
         axiosController.getComments(this.props.location.query).then(comments => {
-            console.log(comments[0]);
             if (comments[0]) {
                 this.setState({
                     comments: comments[0].comments
@@ -118,9 +120,12 @@ class SelectedTicket extends Component {
 
     updateTicketStatus(newStatus) {
         axiosController.updateTicketStatus(this.state.selectedTicket.ticket_id, newStatus).then(response => {
-            alert(response);
             this.updateTicketInfo();
             this.updateNavButton(newStatus);
+            this.setState({
+                isOpen: true,
+                ticketMessage: response
+            })
         })
     }
 
@@ -135,9 +140,8 @@ class SelectedTicket extends Component {
     }
 
     render() {
-        var allComments;
+        let allComments;
         if (this.state.comments) {
-            console.log(this.state.comments);
             allComments = this.state.comments.map(function (data, i) {
                 return (
                     <div className='comment_container' key={i}>
@@ -160,6 +164,7 @@ class SelectedTicket extends Component {
                 <SideNavBar />
                 <div className='selectedticket_container'>
                     <div className='selectedticket_overlay'>
+                        <AlertTickets isOpen={this.state.isOpen} message={this.state.ticketMessage} />
                         <div className='selected-ticket_ticketcontents'>
                             <div className='submit-ticket_topcontainer'>
                                 <section className='submit-ticket_subjectcontainer'>

@@ -19,8 +19,8 @@
     color: white;
     background: rgb(93, 151, 156);
     border: none;
-    width: 22vw;
-    height: 5vw;
+    width: 18vw;
+    height: 4vw;
     cursor: pointer;
     box-shadow: 0px 2px 4px rgb(63, 63, 63);
 }
@@ -30,8 +30,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 20vw;
-    width: 22vw;
+    height: 16vw;
+    width: 18vw;
     box-shadow: 0px 2px 4px rgb(63, 63, 63);
 }
 

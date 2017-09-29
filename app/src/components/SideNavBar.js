@@ -18,14 +18,7 @@ export default class SideNavBar extends Component {
                     <div>
                         <Link to='/dashboard/help'>
                             <section>
-                                <span /><h1>Help</h1>
-                            </section>
-                        </Link>
-                    </div>
-                    <div>
-                        <Link to='/dashboard/settings'>
-                            <section>
-                                <span /><h1>Settings</h1>
+                                <span /><h1>My Info</h1>
                             </section>
                         </Link>
                     </div>

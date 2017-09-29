@@ -214,9 +214,6 @@
 .contact_text {
     animation: fadeIn 1s;
 }
-.contact_text2 {
-    animation: fadeIn 1s;
-}
 
 @keyframes fadeIn {
     from {

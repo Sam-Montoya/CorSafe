@@ -40,6 +40,22 @@ module.exports = {
         })
     },
 
+    getTicketCount: (DB, request, response, auth_id) => {
+        let ticketCounts = []
+        DB.get_resolved_count(auth_id).then(resolved => {
+            ticketCounts.push(resolved);
+
+            DB.get_inprogress_count(auth_id).then(inprogress => {
+                ticketCounts.push(inprogress);
+
+                DB.get_notanswered_count(auth_id).then(notanswered => {
+                    ticketCounts.push(notanswered);
+                    response.status(200).send(ticketCounts);
+                })
+            })
+        })
+    },
+
     createTicket: (DB, response, ticketData) => {
         let { auth_id, subject, status, tag, description, name } = ticketData;
         if (auth_id) {
@@ -64,7 +80,7 @@ module.exports = {
         let { ticket_id, newStatus } = request.body;
 
         DB.update_ticket_status(ticket_id, newStatus).then(data => {
-            response.status(200).send('Ticket #' + ticket_id + ' has been changed to ' + newStatus);
+            response.status(200).send('Ticket #' + ticket_id + ' has been changed to ' + newStatus + '.');
         });
     },
 
