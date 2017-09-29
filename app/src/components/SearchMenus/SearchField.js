@@ -19,7 +19,7 @@ class SearchField extends React.Component {
 
     render() {
         return (
-            <form style={{ width: '12vw', margin: '1vh 0 0 2vw', marginTop: '2.5vh'}}>
+            <form style={{ width: '12vw', margin: '1vh 0 0 2vw', marginTop: '2.5vh' }}>
                 <TextField
                     id="helperText"
                     label="Search"

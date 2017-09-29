@@ -64,7 +64,7 @@ class SubmitTicket extends Component {
                             </section>
 
                             <section className='submit-ticket_buttoncontainer'>
-                                <Alerts ticket={this.state}/>
+                                <Alerts ticket={this.state} />
                                 <Link to='/dashboard'><button className='submit-ticket_buttoncontainer_cancel'>Cancel</button></Link>
                             </section>
                         </div>

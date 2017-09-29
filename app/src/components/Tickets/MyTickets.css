@@ -17,9 +17,11 @@
     width: 78vw;
     margin-bottom: 1vh;
 }
+
 .mytickets_search form {
     margin-top: 1.5vh;
 }
+
 .mytickets_overlay {
     overflow-y: auto;
     display: flex;
@@ -51,14 +53,15 @@
 .mytickets_subjectcontainer {
     width: 25vw !important;
 }
+
 a {
     color: black;
     text-decoration: none !important;
 }
-a:hover 
-{
-     text-decoration:none !important; 
-     cursor:pointer;  
+
+a:hover {
+    text-decoration: none !important;
+    cursor: pointer;
 }
 
 .mytickets_resolved {
@@ -69,12 +72,14 @@ a:hover
     font-weight: lighter;
     background-color: #3CB371 !important;
 }
+
 .mytickets_inprogress {
     height: 6vh !important;
     color: white;
     font-weight: lighter;
     background-color: darkorange !important;
 }
+
 .mytickets_notanswered {
     height: 6vh !important;
     color: white;

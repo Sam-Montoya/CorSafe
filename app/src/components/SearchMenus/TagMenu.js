@@ -23,8 +23,8 @@ class TagMenu extends React.Component {
         sortedTickets.unshift(element)
       if (element.tag !== event.target.value)
         sortedTickets.push(element);
-        
-        return true;
+
+      return true;
     });
     this.props.updateFilteredTickets(sortedTickets);
   };

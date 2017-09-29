@@ -7,8 +7,6 @@ import Dialog, {
     DialogTitle,
 } from 'material-ui/Dialog';
 
-import { createTicket } from '../axiosController';
-import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 
 class AlertTickets extends React.Component {

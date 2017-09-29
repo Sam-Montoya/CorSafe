@@ -148,10 +148,12 @@
     background-color: #3CB371 !important;
     margin-right: 1vw;
 }
+
 .selectedticket_inprogress {
     background-color: darkorange !important;
     margin-right: 1vw;
 }
+
 .selectedticket_delete {
     margin-left: 10vw;
     background-color: #f23236 !important;

@@ -13,8 +13,6 @@ import User from '../../images/User.png';
 import Email from '../../images/Email.png';
 import List from '../../images/List.png';
 
-import _ from 'underscore';
-
 import './Info.css';
 
 class Info extends Component {
@@ -31,7 +29,7 @@ class Info extends Component {
 
     componentDidMount() {
         this.props.updateNavBarText('Your Info');
-        
+
         this.setState({
             userRole: this.props.user.role[0].toUpperCase() + this.props.user.role.substr(1)
         })

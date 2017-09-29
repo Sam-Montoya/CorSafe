@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-// import UserSettings from './Settings/UserSettings'
 import './SideNavBar.css';
 
 export default class SideNavBar extends Component {

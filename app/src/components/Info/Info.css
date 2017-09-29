@@ -31,6 +31,7 @@
     width: 20vw;
     height: 20vw;
 }
+
 .info_profilepic img {
     width: 15vw;
     height: 15vw;
@@ -75,6 +76,7 @@
     font-size: 1.3vw;
     margin-top: 2vh;
 }
+
 .info_tickets h3 {
     margin-top: 1vh;
     font-weight: lighter;
@@ -90,5 +92,6 @@
 }
 
 .info_notanswered {
-    background-color: #696969;;
+    background-color: #696969;
+    ;
 }

@@ -230,24 +230,28 @@
     margin-top: 10vh;
     margin-bottom: 10vh;
 }
+
 .home_github:hover {
     border: 3px solid white;
     width: 16vw;
     height: 16vw;
     background-color: #9370DB;
 }
+
 .home_email:hover {
     border: 3px solid white;
     width: 16vw;
     height: 16vw;
     background-color: #FF7F50;
 }
+
 .home_phone:hover {
     border: 3px solid white;
     width: 16vw;
     height: 16vw;
     background-color: #98FB98;
 }
+
 .home_facebook:hover {
     border: 3px solid white;
     width: 16vw;

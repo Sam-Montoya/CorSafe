@@ -24,7 +24,7 @@ class StatusMenu extends React.Component {
       if (element.status !== event.target.value)
         sortedTickets.push(element);
 
-        return true;
+      return true;
     });
     this.props.updateFilteredTickets(sortedTickets);
   };

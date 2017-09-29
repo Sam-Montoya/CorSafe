@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 import axiosController from '../../axiosController';
 
-import './MyTickets.css';
 import SideNavBar from '../SideNavBar.js';
 import TopNavBar from '../TopNavBar.js';
 import { updateNavBarText, updateUserTickets, updateFilteredTickets, updateButtonClass } from '../ducks/user-reducer';
@@ -18,6 +17,8 @@ import SearchField from '../SearchMenus/SearchField';
 
 import moment from 'moment';
 
+import './MyTickets.css';
+
 class MyTickets extends Component {
 
     componentDidMount() {
@@ -29,11 +30,11 @@ class MyTickets extends Component {
                 this.props.updateFilteredTickets(tickets);
             })
         } else {
-            axiosController.getAdminTickets('google-oauth2|108353722291765184973').then(adminTickets => {
+            axiosController.getAdminTickets(this.props.user.auth_id).then(adminTickets => {
                 this.props.updateUserTickets(adminTickets);
                 this.props.updateFilteredTickets(adminTickets);
             })
-        }  
+        }
     }
 
     render() {
@@ -109,27 +110,27 @@ class MyTickets extends Component {
                     <div className='mytickets_overlay'>
                         <div className='mytickets_ticketcontainer'>
                             <section className='mytickets_idcontainer'>
-                                <h1 style={{fontWeight: 'bold'}}>ID</h1>
+                                <h1 style={{ fontWeight: 'bold' }}>ID</h1>
                             </section>
 
                             <section>
-                                <h1 style={{fontWeight: 'bold'}}>Status</h1>
+                                <h1 style={{ fontWeight: 'bold' }}>Status</h1>
                             </section>
 
                             <section className='mytickets_subjectcontainer'>
-                                <h1 style={{fontWeight: 'bold'}}>Subject</h1>
+                                <h1 style={{ fontWeight: 'bold' }}>Subject</h1>
                             </section>
 
                             <section>
-                                <h1 style={{fontWeight: 'bold'}}>Tag</h1>
+                                <h1 style={{ fontWeight: 'bold' }}>Tag</h1>
                             </section>
 
                             <section>
-                                <h1 style={{fontWeight: 'bold'}}>Name</h1>
+                                <h1 style={{ fontWeight: 'bold' }}>Name</h1>
                             </section>
 
                             <section>
-                                <h1 style={{fontWeight: 'bold'}}>Time</h1>
+                                <h1 style={{ fontWeight: 'bold' }}>Time</h1>
                             </section>
                         </div>
                         {userTickets}

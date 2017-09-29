@@ -26,7 +26,7 @@ class App extends Component {
                   <Route path="/dashboard/submit-ticket" component={SubmitTicket} />
                   <Route path="/dashboard/my-tickets" component={MyTickets} />
                   <Route path="/dashboard/ticket" component={SelectedTicket} />
-                  <Route path="/dashboard/help" component={Info}/>
+                  <Route path="/dashboard/help" component={Info} />
                 </Switch>
               </div>
             )

@@ -37,9 +37,11 @@
 .top-navbar-button-resolved {
     background-color: #3CB371;
 }
+
 .top-navbar-button-notanswered {
     background-color: #696969;
 }
+
 .top-navbar-button-inprogress {
     background-color: darkorange;
 }

@@ -32,7 +32,7 @@ class AlertDelete extends React.Component {
         })
     }
     render() {
-        if(this.state.shouldRedirect) {
+        if (this.state.shouldRedirect) {
             return <Redirect to="/dashboard/my-tickets" />
         }
 

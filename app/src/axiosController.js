@@ -22,7 +22,7 @@ module.exports = {
             }
             else
                 alert(response.data);
-                
+
             return response.data;
         })
     },
