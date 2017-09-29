@@ -16,14 +16,12 @@ module.exports = {
     },
 
     createTicket: (ticketData) => {
-        axios.post('/api/createTicket', ticketData).then(response => {
+        return axios.post('/api/createTicket', ticketData).then(response => {
             if (response.data[0].ticket_id) {
-                alert(`Ticket #${response.data[0].ticket_id} has been created!`);
+                return (`Ticket #${response.data[0].ticket_id} has been created!`);
             }
             else
-                alert(response.data);
-
-            return response.data;
+                return response.data;
         })
     },
 

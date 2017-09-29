@@ -11,25 +11,42 @@ import { createTicket } from '../axiosController';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 
+import AlertTickets from './AlertTickets';
+
 class Alerts extends React.Component {
     state = {
         open: false,
-        shouldRedirect: false
+        shouldRedirect: false,
+        didSubmit: false,
+        submitMessage: ''
     };
 
     handleClickOpen = () => {
         if (this.props.ticket.description && this.props.ticket.subject) {
-            createTicket(this.props.ticket);
-
             this.setState({
-                shouldRedirect: true
+                didSubmit: true
             })
-        } else
+            createTicket(this.props.ticket).then(data => {
+                this.setState({
+                    submitMessage: data
+                })
+            })
             this.setState({ open: true });
+        } else {
+            this.setState({ open: true });
+        }
     };
 
     handleRequestClose = () => {
         this.setState({ open: false });
+    };
+
+    handleRequestCloseSubmit = () => {
+        this.setState({ open: false });
+
+        this.setState({
+            shouldRedirect: true
+        })
     };
 
 
@@ -41,19 +58,36 @@ class Alerts extends React.Component {
         return (
             <div>
                 <button onClick={this.handleClickOpen}>Submit</button>
-                <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
-                    <DialogTitle>{"Submit Ticket Error"}</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>
-                            You must fill out all the information before submitting.
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={this.handleRequestClose} color="primary">
-                            Okay
+                {this.state.didSubmit
+                    ?
+                    <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
+                        <DialogTitle>{"Ticket Successfully Submitted!"}</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                {this.state.submitMessage}
+                            </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={this.handleRequestCloseSubmit} color="primary">
+                                Okay
                         </Button>
-                    </DialogActions>
-                </Dialog>
+                        </DialogActions>
+                    </Dialog>
+                    :
+                    <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
+                        <DialogTitle>{"Submit Ticket Error"}</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                You must fill out all the information before submitting.
+                        </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={this.handleRequestClose} color="primary">
+                                Okay
+                        </Button>
+                        </DialogActions>
+                    </Dialog>
+                }
             </div>
         );
     }
