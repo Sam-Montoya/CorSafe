@@ -4,7 +4,6 @@ module.exports = {
         DB.find_user_by_authID(profileData.auth_id).then((user) => {
             if (!user[0]) {
                 let { username, name, email, profilepic, auth_id, role } = profileData;
-
                 DB.create_user(username, name, email, profilepic, auth_id, role);
             }
         })
@@ -78,7 +77,6 @@ module.exports = {
 
     updateTicketStatus: (DB, request, response) => {
         let { ticket_id, newStatus } = request.body;
-
         DB.update_ticket_status(ticket_id, newStatus).then(data => {
             response.status(200).send('Ticket #' + ticket_id + ' has been changed to ' + newStatus + '.');
         });

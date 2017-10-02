@@ -22,7 +22,7 @@ import './MyTickets.css';
 class MyTickets extends Component {
 
     componentDidMount() {
-        this.props.updateNavBarText('Your Tickets');
+        this.props.updateNavBarText('My Tickets');
         this.props.updateButtonClass('top-navbar-hidebutton');
         if (this.props.user.role === 'user') {
             axiosController.getUserTickets(this.props.user.auth_id).then(tickets => {
@@ -69,6 +69,7 @@ class MyTickets extends Component {
                                 </section>
                             )
                         }
+
                         <section className='mytickets_subjectcontainer'>
                             <Link to={{ pathname: '/dashboard/ticket/', query: ticket.ticket_id }} key={i}>
                                 <h1>{ticket.subject}</h1></Link>

@@ -4,6 +4,8 @@ import TerminalImage from '../../images/Terminal.png';
 import ClockImage from '../../images/Clock.png';
 import ChartImage from '../../images/Improve.png';
 import './Home.css';
+import moment from 'moment';
+
 export default class Home extends Component {
     constructor() {
         super();
@@ -78,7 +80,6 @@ export default class Home extends Component {
                         </section>
 
                         <div className='home_contactsquares'>
-
                             <a target="_blank" rel='noopener noreferrer' href='https://github.com/Sam-Montoya?tab=repositories'><section className='home_github'>
                                 <i className="fa fa-github fa-5x" aria-hidden="true" />
                             </section></a>
@@ -95,6 +96,7 @@ export default class Home extends Component {
                                 <i className="fa fa-facebook fa-5x" aria-hidden="true" />
                             </section></a>
                         </div>
+
                         {this.state.contactText
                             ?
                             <h1 className='contact_text'>{this.state.contactText}</h1>
@@ -103,7 +105,7 @@ export default class Home extends Component {
                         }
                     </div>
                 </div>
-            </div >
+            </div>
         )
     }
 }

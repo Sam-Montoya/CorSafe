@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 // import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { updateNavBarText } from '../ducks/user-reducer';
+import { updateNavBarText, updateButtonClass } from '../ducks/user-reducer';
 
 import SideNavBar from '../SideNavBar';
 import TopNavBar from '../TopNavBar';
@@ -28,7 +28,8 @@ class Info extends Component {
     }
 
     componentDidMount() {
-        this.props.updateNavBarText('Your Info');
+        this.props.updateNavBarText('My Info');
+        this.props.updateButtonClass('top-navbar-hidebutton');
 
         if (this.props.user.auth_id) {
             this.setState({
@@ -114,4 +115,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { updateNavBarText })(Info);
+export default connect(mapStateToProps, { updateNavBarText, updateButtonClass })(Info);

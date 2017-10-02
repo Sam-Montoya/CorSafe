@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import axiosController from '../../axiosController';
+import moment from 'moment';
 
 import TopNavBar from '../TopNavBar';
 import SideNavBar from '../SideNavBar';
@@ -33,7 +34,8 @@ class SelectedTicket extends Component {
                 name: '',
                 profile_pic: '',
                 auth_id: '',
-                comment: ''
+                comment: '',
+                timeSubmitted: ''
             },
             comments: [],
             isOpen: false,
@@ -48,7 +50,8 @@ class SelectedTicket extends Component {
             name: this.props.user.name,
             profile_pic: this.props.user.profilepic,
             auth_id: this.props.user.auth_id,
-            comment: ''
+            comment: '',
+            timeSubmitted: ''
         }
         this.setState({
             postComment: commentInfo
@@ -96,6 +99,7 @@ class SelectedTicket extends Component {
     updateCommentBox(input) {
         let commentValue = Object.assign({}, this.state.postComment);
         commentValue.comment = input;
+        commentValue.timeSubmitted = new Date(Date.now());
         this.setState({
             postComment: commentValue
         })
@@ -109,8 +113,6 @@ class SelectedTicket extends Component {
                 axiosController.postComment(this.state.postComment).then(() => {
                     this.updateComments();
                 });
-
-
                 document.getElementById('submitarea').value = '';
             } else {
                 alert('Not Logged In!');
@@ -145,13 +147,19 @@ class SelectedTicket extends Component {
             allComments = this.state.comments.map(function (data, i) {
                 return (
                     <div className='comment_container' key={i}>
-                        <section className='comment_userinfo'>
-                            <img className='comment_profilepic' src={data.profile_pic} alt='' />
-                            <h2>{data.name}</h2>
-                        </section>
+                        <div style={{display: 'flex'}}>
+                            <section className='comment_userinfo'>
+                                <img className='comment_profilepic' src={data.profile_pic} alt='' />
+                                <h2>{data.name}</h2>
+                            </section>
 
-                        <section className='comment_commentconainer'>
-                            <h2>{data.comment}</h2>
+                            <section className='comment_commentconainer'>
+                                <h2>{data.comment}</h2>
+                            </section>
+                        </div>
+
+                        <section className='comment_time'>
+                            <h3>{moment(data.timeSubmitted).fromNow()}</h3>
                         </section>
                     </div>
                 )
@@ -169,18 +177,18 @@ class SelectedTicket extends Component {
                             <div className='submit-ticket_topcontainer'>
                                 <section className='submit-ticket_subjectcontainer'>
                                     <h1>Subject</h1>
-                                    <input type='text' value={this.state.selectedTicket.subject} disabled />
+                                    <input style={{backgroundColor: 'rgb(250, 250, 250)'}} type='text' value={this.state.selectedTicket.subject} disabled />
                                 </section>
 
                                 <section className='submit-ticket_tagcontainer'>
                                     <h1>Tag</h1>
-                                    <input type='text' value={this.state.selectedTicket.tag} disabled />
+                                    <input style={{backgroundColor: 'rgb(250, 250, 250)'}} type='text' value={this.state.selectedTicket.tag} disabled />
                                 </section>
                             </div>
 
                             <section className='submit-ticket_bottomcontainer'>
                                 <h1>Description</h1>
-                                <textarea rows='6' cols='50' value={this.state.selectedTicket.description} disabled />
+                                <textarea style={{backgroundColor: 'rgb(250, 250, 250)'}} rows='6' cols='50' value={this.state.selectedTicket.description} disabled />
                             </section>
 
                             <section>
@@ -212,7 +220,7 @@ class SelectedTicket extends Component {
 
                         <div className='selected-ticket_comments'>
                             {allComments}
-                            <div className='comment_container'>
+                            <div className='add_comment_container'>
                                 <section className='comment_userinfo'>
                                     <img className='comment_profilepic' src={this.props.user.profilepic} alt='' />
                                 </section>
