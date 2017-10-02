@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import './SubmitTicket.css';
 
-
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -27,7 +26,7 @@ class SubmitTicket extends Component {
 
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.setState({
             auth_id: this.props.user.auth_id,
             name: this.props.user.name

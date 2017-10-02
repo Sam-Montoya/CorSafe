@@ -8,12 +8,18 @@ import axiosController from '../../axiosController';
 
 import UserDashboard from './UserDashboard';
 import MyTickets from '../Tickets/MyTickets';
-
+import axios from 'axios';
 import './DashboardController.css';
 
 class DashboardController extends Component {
 
     componentDidMount() {
+        axios.get('/auth/authorized').then(user => {
+            if (!user.data) {
+                this.props.history.push('/')
+            }
+        });
+
         axiosController.getUserInfo().then(userInfo => {
             this.props.updateCurrentUser(userInfo);
             if (this.props.user.role === 'user')

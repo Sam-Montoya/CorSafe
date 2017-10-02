@@ -30,9 +30,11 @@ class Info extends Component {
     componentDidMount() {
         this.props.updateNavBarText('Your Info');
 
-        this.setState({
-            userRole: this.props.user.role[0].toUpperCase() + this.props.user.role.substr(1)
-        })
+        if (this.props.user.auth_id) {
+            this.setState({
+                userRole: this.props.user.role[0].toUpperCase() + this.props.user.role.substr(1)
+            })
+        }
         axiosController.getTicketCount(this.props.user.auth_id).then(data => {
             this.setState({
                 resolvedTickets: data[0][0].count,

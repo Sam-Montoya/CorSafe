@@ -9,7 +9,7 @@
 .selectedticket_overlay {
     background: rgba(255, 255, 255, .8);
     overflow-y: scroll;
-    height: 84vh;
+    height: 82vh;
     width: 78vw;
     margin-top: 5vh;
 }

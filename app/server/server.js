@@ -70,6 +70,13 @@ app.get('/auth0/logout', (request, response) => {
     request.logOut();
     return response.redirect(302, 'http://localhost:3000/#/');
 });
+app.get('/auth/authorized', (req, res) => {
+    if (!req.user) {
+        return res.send(false)
+    } else {
+        return res.status(200).send(req.user);
+    }
+})
 // ------------------
 // -   END
 // ------------------

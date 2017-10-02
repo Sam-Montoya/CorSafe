@@ -2,9 +2,19 @@ import React, { Component } from 'react';
 import './TopNavBar.css';
 import './Tickets/SelectedTicket.css'
 import { connect } from 'react-redux';
+import axios from 'axios';
+import { createHashHistory } from 'history'
 
 class TopNavBar extends Component {
-    xw
+    
+    componentWillMount() {
+        axios.get('/auth/authorized').then(user => {
+            if (!user.data) {
+                createHashHistory().push('/');
+            }
+        });
+    }
+
     render() {
         return (
             <div className="top-navbar">

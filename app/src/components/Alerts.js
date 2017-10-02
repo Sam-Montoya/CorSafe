@@ -11,8 +11,6 @@ import { createTicket } from '../axiosController';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 
-import AlertTickets from './AlertTickets';
-
 class Alerts extends React.Component {
     state = {
         open: false,
