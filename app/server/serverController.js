@@ -82,6 +82,14 @@ module.exports = {
         });
     },
 
+    updateNotificationStatus: (DB, response, notificationData) => {
+        let { ticket_id, newStatus } = notificationData;
+        console.log(notificationData);
+        DB.update_notification([ticket_id, newStatus]).then(data => {
+            response.status(200).send('Notification has been viewed.')
+        })
+    },
+
     postComment: (DB, request, response, commentData) => {
         DB.post_comment([commentData, commentData.ticket_id]).then((data) => {
             response.status(200).send('Comment Successful');

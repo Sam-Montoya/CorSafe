@@ -64,6 +64,12 @@ class SelectedTicket extends Component {
                 })
                 this.props.updateNavBarText('Ticket #' + ticketInfo[0].ticket_id);
                 this.updateNavButton(ticketInfo[0].status)
+
+                if(ticketInfo[0].notification){
+                    axiosController.updateNotificationStatus(ticketInfo[0].ticket_id, false).then(response => {
+                        console.log(response);
+                    })
+                }
             }
         });
 
@@ -112,6 +118,9 @@ class SelectedTicket extends Component {
             if (this.props.user.auth_id) {
                 axiosController.postComment(this.state.postComment).then(() => {
                     this.updateComments();
+                    axiosController.updateNotificationStatus(this.state.selectedTicket.ticket_id, true).then(response => {
+                        console.log(response);
+                    });
                 });
                 document.getElementById('submitarea').value = '';
             } else {

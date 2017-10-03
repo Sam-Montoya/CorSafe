@@ -119,7 +119,11 @@ app.delete('/api/deleteTicket/:ticket_id', (request, response) => {
 })
 app.patch('/api/updateTicketStatus', (request, response) => {
     let DB = app.get('DB');
-    serverController.updateTicketStatus(DB, request, response);
+    serverController.updateTicketStatus(DB, request, request.body);
+})
+app.patch('/api/updateNotificationStatus', (request, response) => {
+    let DB = app.get('DB');
+    serverController.updateNotificationStatus(DB, response, request.body)
 })
 app.post('/api/postComment', (request, response) => {
     let DB = app.get('DB');

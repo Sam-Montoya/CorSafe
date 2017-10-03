@@ -68,6 +68,13 @@ module.exports = {
         })
     },
 
+    updateNotificationStatus: (ticket_id, newStatus) => {
+        let notificationData = { ticket_id: ticket_id, newStatus: newStatus }
+        return axios.patch('/api/updateNotificationStatus', notificationData).then(response => {
+            return response.data;
+        })
+    },
+
     getComments: (ticket_id) => {
         let ticketID = { ticket_id: ticket_id }
 

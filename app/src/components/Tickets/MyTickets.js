@@ -38,15 +38,24 @@ class MyTickets extends Component {
     }
 
     render() {
+        let auth_id = this.props.user.auth_id
         let userTickets;
         if (this.props.user.userTickets) {
             userTickets = this.props.user.filteredTickets.map(function (ticket, i) {
                 return (
                     <div className='mytickets_ticketcontainer' key={i}>
-                        <section className='mytickets_idcontainer'>
-                            <Link to={{ pathname: '/dashboard/ticket/', query: ticket.ticket_id }}>
-                                <h1>{ticket.ticket_id}</h1></Link>
-                        </section>
+                        {ticket.notification && auth_id === ticket.auth_id
+                            ?
+                            <section className='mytickets_idcontainer_notify'>
+                                <Link to={{ pathname: '/dashboard/ticket/', query: ticket.ticket_id }}>
+                                    <h1>{ticket.ticket_id}</h1></Link>
+                            </section>
+                            :
+                            <section>
+                                <Link to={{ pathname: '/dashboard/ticket/', query: ticket.ticket_id }}>
+                                    <h1>{ticket.ticket_id}</h1></Link>
+                            </section>
+                        }
 
                         {ticket.status === 'Resolved'
                             ?
