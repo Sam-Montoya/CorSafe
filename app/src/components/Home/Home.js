@@ -4,7 +4,6 @@ import TerminalImage from '../../images/Terminal.png';
 import ClockImage from '../../images/Clock.png';
 import ChartImage from '../../images/Improve.png';
 import './Home.css';
-import moment from 'moment';
 
 export default class Home extends Component {
     constructor() {
