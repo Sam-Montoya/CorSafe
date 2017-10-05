@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
 
 import StripeCheckout from 'react-stripe-checkout';
-import axios from 'axios';
 
 export default class Stripe extends Component {
-
-  onToken = (token) => {
-    token.card = void 0;
-  }
 
   render() {
     return (
       <div>
         <StripeCheckout
-          token={this.onToken}
-          stripeKey={'pk_test_5ZqhFejW6WlLGSLRycoDbs57'}
+          token={1}
+          stripeKey={process.env.REACT_APP_API_KEY}
           amount={1000}
         />
       </div >
