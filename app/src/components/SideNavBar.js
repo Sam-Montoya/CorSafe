@@ -25,7 +25,7 @@ export default class SideNavBar extends Component {
                         <a href={process.env.REACT_APP_LOGOUT}>
                             <section>
                                 <span />Logout
-                        </section>
+                            </section>
                         </a>
                     </div>
                 </div>

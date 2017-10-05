@@ -12,6 +12,7 @@ import axiosController from '../../axiosController';
 import User from '../../images/User.png';
 import Email from '../../images/Email.png';
 import List from '../../images/List.png';
+import Stripe from '../Stripe.js';
 
 import './Info.css';
 
@@ -100,6 +101,11 @@ class Info extends Component {
                                     <h3>{this.state.notAnsweredTickets}</h3>
                                 </div>
                             </section>
+
+                            <section style={{ marginTop: '3vh' }}>
+                                <Stripe />
+                            </section>
+
                         </div>
                     </div>
                 </div>
