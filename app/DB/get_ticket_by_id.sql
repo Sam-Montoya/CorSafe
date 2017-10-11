@@ -1,1 +1,0 @@
-SELECT * FROM tickets WHERE ticket_id = $1;

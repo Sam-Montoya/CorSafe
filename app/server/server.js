@@ -11,8 +11,15 @@ const Auth0Strategy = require('passport-auth0');
 const session = require('express-session');
 
 const app = express();
+
+app.use((req, res, next)=>{
+    console.log(req.url);
+    next();
+})
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express.static(`${__dirname}/../build`));
+
 
 
 
@@ -61,14 +68,14 @@ passport.deserializeUser((user, done) => {
         return done(null, user[0]);
     });
 });
-app.get('/auth0', passport.authenticate('auth0'));
+// app.get('/auth0', passport.authenticate('auth0'));
 app.get('/auth0/authenticate', passport.authenticate('auth0', {
-    successRedirect: 'http://localhost:3000/#/dashboard',
-    failureRedirect: 'http://localhost:3000/#/'
+    successRedirect: process.env.SUCCESS_REDIRECT,
+    failureRedirect: process.env.FAILURE_REDIRECT
 }));
 app.get('/auth0/logout', (request, response) => {
     request.logOut();
-    return response.redirect(302, 'http://localhost:3000/#/');
+    return response.redirect(302, process.env.FAILURE_REDIRECT);
 });
 app.get('/auth/authorized', (req, res) => {
     if (!req.user) {
@@ -87,6 +94,7 @@ app.get('/auth/authorized', (req, res) => {
 // -   API CALLS
 // ----------------------
 app.get('/api/getUserInfo', (request, response) => {
+    console.log('Hit!');
     response.status(200).send(request.user);
 })
 app.post('/api/getUserById', (request, response) => {
@@ -119,7 +127,7 @@ app.delete('/api/deleteTicket/:ticket_id', (request, response) => {
 })
 app.patch('/api/updateTicketStatus', (request, response) => {
     let DB = app.get('DB');
-    serverController.updateTicketStatus(DB, request, request.body);
+    serverController.updateTicketStatus(DB, request, response);
 })
 app.patch('/api/updateNotificationStatus', (request, response) => {
     let DB = app.get('DB');

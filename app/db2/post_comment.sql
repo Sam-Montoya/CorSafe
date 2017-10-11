@@ -1,0 +1,1 @@
+UPDATE comments SET comments = array_append(comments, $1) WHERE ticket_id = $2;

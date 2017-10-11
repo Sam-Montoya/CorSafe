@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name": "samuel-montoya-corsafe",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -12,6 +12,7 @@
     "massive": "^4.0.0",
     "material-ui": "^1.0.0-beta.12",
     "moment": "^2.18.1",
+    "now": "^8.3.10",
     "passport": "^0.4.0",
     "passport-auth0": "^0.6.0",
     "react": "^15.6.1",
@@ -29,13 +30,18 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "now --public --dotenv=.env.prod -d",
+    "now-start": "node server/server.js"
+  },
+  "now": {
+    "alias": "samuel-montoya-corsafe"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
   "main": "server/server.js",
   "devDependencies": {},
   "keywords": [],
-  "author": "",
+  "author": "Sam Montoya",
   "license": "ISC",
   "proxy": "http://localhost:3030"
 }

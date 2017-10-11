@@ -56,13 +56,12 @@ module.exports = {
     },
 
     createTicket: (DB, response, ticketData) => {
-        let { auth_id, subject, status, tag, description, name } = ticketData;
+        let { auth_id, subject, status, tag, description, name, time_submitted} = ticketData;
         if (auth_id) {
-            DB.create_ticket(auth_id, subject, status, tag, description, name).then(data => {
+            DB.create_ticket(auth_id, subject, status, tag, description, time_submitted, name).then(data => {
                 DB.init_comment(data[0].ticket_id).then(() => {
-                    console.log('Created Comment Section');
+                    response.status(200).send(data);
                 })
-                response.status(200).send(data);
             })
         } else {
             response.status(200).send('Account not valid.');
@@ -77,6 +76,7 @@ module.exports = {
 
     updateTicketStatus: (DB, request, response) => {
         let { ticket_id, newStatus } = request.body;
+        console.log(request.body)
         DB.update_ticket_status(ticket_id, newStatus).then(data => {
             response.status(200).send('Ticket #' + ticket_id + ' has been changed to ' + newStatus + '.');
         });

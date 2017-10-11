@@ -1,0 +1,1 @@
+INSERT INTO comments (ticket_id) values ($1);

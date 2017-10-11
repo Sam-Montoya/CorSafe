@@ -1,1 +1,0 @@
-SELECT * FROM  tickets ORDER BY date DESC;

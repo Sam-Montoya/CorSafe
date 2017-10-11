@@ -22,6 +22,7 @@ class SubmitTicket extends Component {
             tag: 'Normal',
             description: '',
             name: '',
+            time_submitted: new Date(Date.now())
         }
 
     }
@@ -35,7 +36,6 @@ class SubmitTicket extends Component {
     }
 
     render() {
-
         return (
             <div>
                 <TopNavBar />

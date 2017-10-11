@@ -66,3 +66,26 @@
 
 // insert into time (date) values (CURRENT_TIMESTAMP);
 // ALTER TABLE tickets ADD COLUMN date TIMESTAMP;
+
+
+
+
+
+
+// create table comments (
+//     id serial primary key,
+//     ticket_id integer,
+//     comments json[]
+//     )
+
+// create table tickets (
+//     ticket_id serial primary key,
+//     auth_id text,
+//     subject text,
+//     status text,
+//     description text,
+//     date TIMESTAMP,
+//     tag text,
+//     name text,
+//     notification boolean
+//     )

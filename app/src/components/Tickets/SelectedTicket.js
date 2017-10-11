@@ -67,7 +67,7 @@ class SelectedTicket extends Component {
 
                 if(ticketInfo[0].notification){
                     axiosController.updateNotificationStatus(ticketInfo[0].ticket_id, false).then(response => {
-                        console.log(response);
+                        
                     })
                 }
             }

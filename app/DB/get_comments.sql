@@ -1,1 +1,0 @@
-SELECT * FROM comments WHERE ticket_id = $1;

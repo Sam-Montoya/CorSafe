@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import './Carousel.css';
 
-import Resolved from '../../images/Resolved.gif';
-import Comment from '../../images/Comment.gif'
-import Submit from '../../images/Submit.gif';
-
 export default class Carousel extends Component {
     render() {
         return (
@@ -17,13 +13,13 @@ export default class Carousel extends Component {
                     </ol>
                     <div className="carousel-inner">
                         <div className="item active">
-                            <img src={Resolved} alt="First Slide" style={{ width: '50vw', height: '50vh' }} />
+                            <img src={'https://lh6.googleusercontent.com/DnD16CbOyA84BnE1oybKvWZGQ95icWJGvTBy4Pba0AJNNfOrar1-cVi6dvJmjPsgBrgXfBRQXgO9Uvs=w1918-h983-rw'} alt="First Slide" style={{ width: '50vw', height: '50vh' }} />
                         </div>
                         <div className="item">
-                            <img src={Comment} alt="Second Slide" style={{ width: '50vw', height: '50vh' }} />
+                            <img src={'https://lh6.googleusercontent.com/0vwwZuoIvWRvl4Z_xNv4U9Itwhcvj-dtln6WsnWRaCOai6At97Mq39MlMjMKuFGRdDfM7lHvsG38-ek=w1918-h983-rw'} alt="Second Slide" style={{ width: '50vw', height: '50vh' }} />
                         </div>
                         <div className="item">
-                            <img src={Submit} alt="Third Slide" style={{ width: '50vw', height: '50vh' }} />
+                            <img src={'https://lh6.googleusercontent.com/aHxUvox08N3E5dpEgWbvtzV6IlO07_fCtF9bRYKKmkG3UGDs_4NI4r8-3rdVGlBncogKuaVbqQOiOhw=w1918-h983'} alt="Third Slide" style={{ width: '50vw', height: '50vh' }} />
                         </div>
                     </div>
                     <a className="carousel-control left" href="#myCarousel" data-slide="prev">
